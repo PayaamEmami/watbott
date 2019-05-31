@@ -1,0 +1,21 @@
+footer {
+  padding: 12px;
+  font-size: 12px;
+  margin-top: 40px;
+  background: #673ab7;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.footer-list {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 8px;
+}
+
+.footer-copyright {
+  flex: 1;
+  text-align: center;
+}
