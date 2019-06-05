@@ -7,3 +7,17 @@
   height: 32px;
   border-radius: 50%;
 }
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+}

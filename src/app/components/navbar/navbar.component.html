@@ -1,13 +1,20 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
-  <a routerLink="/" routerLinkActive="active" mat-button>
-    <img [src]="watbottPath" class="icon-logo"> WatBott
+  <a mat-button routerLink="/" routerLinkActive="active">
+    <img class="icon-logo" [src]="watbottPath"> WatBott
   </a>
-  <a routerLink="/about" routerLinkActive="active" mat-button>About</a>
+  <a mat-button routerLink="/about" routerLinkActive="active">About</a>
   <span class="flex-spacer"></span>
-  <a mat-button [href]="twitterUrl">
-    <mat-icon svgIcon="twitter-logo" class="icon-logo"></mat-icon> Twitter
+  <a mat-button class="desktop-only" [href]="twitterUrl">
+    <mat-icon class="icon-logo" svgIcon="twitter-logo"></mat-icon> Twitter
   </a>
-  <a mat-button [href]="githubUrl">
+  <a mat-button class="desktop-only" [href]="githubUrl">
     <img [src]="githubPath"> GitHub
   </a>
+  <button mat-button class="mobile-only" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item [href]="twitterUrl">Twitter</a>
+    <a mat-menu-item [href]="githubUrl">GitHub</a>
+  </mat-menu>
 </mat-toolbar>
