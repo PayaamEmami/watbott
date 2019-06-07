@@ -50,8 +50,8 @@ passport.use(
   "twitch",
   new OAuth2Strategy(
     {
-      authorizationUrl: "https://id.twitch.tv/oauth2/authorize",
-      tokenUrl: "https://id.twitch.tv/oauth2/token",
+      authorizationURL: "https://id.twitch.tv/oauth2/authorize",
+      tokenURL: "https://id.twitch.tv/oauth2/token",
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,

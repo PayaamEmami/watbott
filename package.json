@@ -1,6 +1,7 @@
 {
   "name": "watbott",
   "version": "0.0.0",
+  "main": "src/server/server.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
