@@ -8,7 +8,7 @@ import { MatIconRegistry } from '@angular/material/icon';
   styleUrls: ['./login-twitch.component.css']
 })
 export class LoginTwitchComponent implements OnInit {
-  loginUrl = '';
+  loginUrl: string;
   @Input() icon: string;
   @Input() color: string;
 
