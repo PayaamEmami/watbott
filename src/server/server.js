@@ -66,6 +66,15 @@ passport.use(
   )
 );
 
+app.get("/auth", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  if (req.session && req.session.passport && req.session.passport.user) {
+    res.status(200).send("User is authorized");
+  } else {
+    res.status(401).send("User is not authorized");
+  }
+});
+
 app.get(
   "/auth/twitch",
   passport.authenticate("twitch", { scope: "user_read" })

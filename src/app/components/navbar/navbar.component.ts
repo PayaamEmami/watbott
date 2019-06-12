@@ -8,21 +8,22 @@ import { MatIconRegistry } from '@angular/material/icon';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  twitterUrl: string;
-  githubUrl: string;
-  githubPath: string;
-  watbottPath: string;
+  twitterUrl = 'https://twitter.com/WatBott';
+  githubUrl = 'https://github.com/PayaamEmami/watbott';
+  githubPath = '../../assets/img/socials/github_white.png';
+  watbottPath = '../../assets/img/logo/watbott_background_icon.png';
+  isAuth: boolean;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    this.twitterUrl = 'https://twitter.com/WatBott';
-    this.githubUrl = 'https://github.com/PayaamEmami/watbott';
-    this.githubPath = '../../assets/img/socials/github_white.png';
-    this.watbottPath = '../../assets/img/logo/watbott_background_icon.png';
     iconRegistry.addSvgIcon(
       'twitter-logo',
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
-   }
+
+    fetch('http://localhost:3000/auth').then((res) => {
+      this.isAuth = (res.status === 200) ? true : false;
+    });
+  }
 
   ngOnInit() {
   }

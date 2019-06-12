@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  githubUrl: string;
+  githubUrl = 'https://github.com/PayaamEmami/watbott';
 
   constructor() {
-    this.githubUrl = 'https://github.com/PayaamEmami/watbott';
   }
 
   ngOnInit() {
