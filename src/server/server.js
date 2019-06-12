@@ -81,9 +81,9 @@ app.get(
 
 app.get("/", (req, res) => {
   if (req.session && req.session.passport && req.session.passport.user) {
-    res.send("dashboard");
+    res.redirect("http://localhost:4200/dashboard");
   } else {
-    res.send("root");
+    res.redirect("http://localhost:4200");
   }
 });
 

@@ -13,7 +13,7 @@ export class LoginTwitchComponent implements OnInit {
   @Input() color: string;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    this.loginUrl = '#';
+    this.loginUrl = 'http://localhost:3000/auth/twitch';
     iconRegistry.addSvgIcon(
       'twitch-logo-white',
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitch_white.svg')

@@ -19,9 +19,11 @@ import { HomePromoComponent } from './components/home/home-promo/home-promo.comp
 import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
 import { AboutComponent } from './components/about/about.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ];
@@ -37,6 +39,7 @@ const routes: Routes = [
     HomeHeaderComponent,
     AboutComponent,
     PageHeaderComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
