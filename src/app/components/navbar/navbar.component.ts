@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +13,15 @@ export class NavbarComponent implements OnInit {
   githubUrl = 'https://github.com/PayaamEmami/watbott';
   githubPath = '../../assets/img/socials/github_white.png';
   watbottPath = '../../assets/img/logo/watbott_background_icon.png';
-  isAuth: boolean;
+  isAuthenticated: boolean;
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(private authService: AuthenticationService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
       'twitter-logo',
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
 
-    fetch('http://localhost:3000/auth').then((res) => {
-      this.isAuth = (res.status === 200) ? true : false;
-    });
+    this.isAuthenticated = authService.isAuthenticated();
   }
 
   ngOnInit() {

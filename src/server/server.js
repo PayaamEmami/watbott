@@ -68,10 +68,10 @@ passport.use(
 
 app.get("/auth", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  if (req.session && req.session.passport && req.session.passport.user) {
-    res.status(200).send("User is authorized");
+  if (req.user) {
+    res.status(200).send("User is authenticated");
   } else {
-    res.status(401).send("User is not authorized");
+    res.status(401).send("User is not authenticated");
   }
 });
 
