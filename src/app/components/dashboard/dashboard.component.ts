@@ -11,10 +11,10 @@ export class DashboardComponent implements OnInit {
   isAuthenticated: boolean;
 
   constructor(private authService: AuthenticationService, private router: Router) {
-    this.isAuthenticated = authService.isAuthenticated();
+    this.isAuthenticated = authService.auth;
 
     if (!this.isAuthenticated) {
-      this.router.navigateByUrl('http://localhost');
+      this.router.navigateByUrl('/');
     }
   }
 

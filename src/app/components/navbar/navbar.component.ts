@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
 
-    this.isAuthenticated = authService.isAuthenticated();
+    this.isAuthenticated = authService.auth;
   }
 
   ngOnInit() {
