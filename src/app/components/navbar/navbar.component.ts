@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService, Auth } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +21,9 @@ export class NavbarComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
 
-    this.isAuthenticated = authService.auth;
+    this.authService.isAuthenticated().subscribe((data: Auth) => {
+      this.isAuthenticated = (data.auth === 'true') ? true : false;
+    });
   }
 
   ngOnInit() {

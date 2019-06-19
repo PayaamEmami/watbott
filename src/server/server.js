@@ -4,8 +4,8 @@ const session = require("express-session");
 const passport = require("passport");
 const OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 const request = require("request");
+const cors = require("cors");
 const app = express();
-const port = 3000;
 
 app.use(
   session({
@@ -17,6 +17,7 @@ app.use(
 app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors({ credentials: true, origin: true }));
 
 OAuth2Strategy.prototype.userProfile = (accessToken, done) => {
   var options = {
@@ -67,11 +68,11 @@ passport.use(
 );
 
 app.get("/auth", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader("Content-Type", "application/json");
   if (req.user) {
-    res.status(200).send("User is authenticated");
+    res.end(JSON.stringify({ auth: "true" }));
   } else {
-    res.status(401).send("User is not authenticated");
+    res.end(JSON.stringify({ auth: "false" }));
   }
 });
 
@@ -88,6 +89,11 @@ app.get(
   })
 );
 
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("http://localhost:4200");
+});
+
 app.get("/", (req, res) => {
   if (req.session && req.session.passport && req.session.passport.user) {
     res.redirect("http://localhost:4200/dashboard");
@@ -96,4 +102,4 @@ app.get("/", (req, res) => {
   }
 });
 
-app.listen(port, () => console.log("Server started on port " + port));
+app.listen(process.env.PORT, () => console.log("Server started"));

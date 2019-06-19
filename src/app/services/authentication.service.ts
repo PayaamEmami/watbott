@@ -1,16 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
+export interface Auth {
+  auth: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  auth: boolean;
 
-  constructor(private http: HttpClient) {
-    this.http.get('http://localhost:3000/auth', { observe: 'response', withCredentials: true })
-      .subscribe((res) => {
-        this.auth = (res.status === 200) ? true : false;
-      });
+  constructor(private http: HttpClient) { }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError(
+      'Something bad happened; please try again later.');
+  }
+
+  isAuthenticated() {
+    return this.http.get<Auth>('http://localhost:3000/auth',
+      { withCredentials: true, responseType: 'json' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }
