@@ -2,19 +2,41 @@
   <a mat-button routerLink="/" routerLinkActive="active">
     <img class="icon-logo" [src]="watbottPath"> WatBott
   </a>
-  <a mat-button routerLink="/about" routerLinkActive="active">About</a>
-  <a *ngIf="isAuthenticated" mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+  <a mat-button class="desktop-only" routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated">
+    Dashboard
+  </a>
+  <a mat-button class="desktop-only" routerLink="/about" routerLinkActive="active">
+    About
+  </a>
+  <button mat-button class="desktop-only" [matMenuTriggerFor]="socialMenu" *ngIf="isAuthenticated">
+    Socials
+  </button>
   <span class="flex-spacer"></span>
-  <a mat-button class="desktop-only" [href]="twitterUrl">
+  <a mat-button class="desktop-only" [href]="logoutUrl" *ngIf="isAuthenticated">
+    Logout
+  </a>
+  <a mat-button class="desktop-only" [href]="twitterUrl" *ngIf="!isAuthenticated">
     <mat-icon class="icon-logo" svgIcon="twitter-logo"></mat-icon> Twitter
   </a>
-  <a mat-button class="desktop-only" [href]="githubUrl">
+  <a mat-button class="desktop-only" [href]="githubUrl" *ngIf="!isAuthenticated">
     <img [src]="githubPath"> GitHub
   </a>
   <button mat-button class="mobile-only" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated">
+      Dashboard
+    </a>
+    <a mat-menu-item routerLink="/about" routerLinkActive="active">About</a>
+    <button mat-menu-item class="mobile-only" [matMenuTriggerFor]="socialMenu">
+      Socials
+    </button>
+    <a mat-menu-item [href]="logoutUrl" *ngIf="isAuthenticated">
+      Logout
+    </a>
+  </mat-menu>
+  <mat-menu #socialMenu="matMenu">
     <a mat-menu-item [href]="twitterUrl">Twitter</a>
     <a mat-menu-item [href]="githubUrl">GitHub</a>
   </mat-menu>

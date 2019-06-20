@@ -11,6 +11,7 @@ import { AuthenticationService, Auth } from '../../services/authentication.servi
 export class NavbarComponent implements OnInit {
   twitterUrl = 'https://twitter.com/WatBott';
   githubUrl = 'https://github.com/PayaamEmami/watbott';
+  logoutUrl = 'http://localhost:3000/logout';
   githubPath = '../../assets/img/socials/github_white.png';
   watbottPath = '../../assets/img/logo/watbott_background_icon.png';
   isAuthenticated: boolean;
@@ -20,6 +21,8 @@ export class NavbarComponent implements OnInit {
       'twitter-logo',
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
+
+    this.isAuthenticated = false;
 
     this.authService.isAuthenticated().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;
