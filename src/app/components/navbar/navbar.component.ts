@@ -14,15 +14,13 @@ export class NavbarComponent implements OnInit {
   logoutUrl = 'http://localhost:3000/logout';
   githubPath = '../../assets/img/socials/github_white.png';
   watbottPath = '../../assets/img/logo/watbott_background_icon.png';
-  isAuthenticated: boolean;
+  isAuthenticated = false;
 
   constructor(private authService: AuthenticationService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(
       'twitter-logo',
       sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
-
-    this.isAuthenticated = false;
 
     this.authService.isAuthenticated().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;
