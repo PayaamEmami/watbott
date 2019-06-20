@@ -8,7 +8,7 @@ import { AuthenticationService, Auth } from '../../services/authentication.servi
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  isAuthenticated: boolean;
+  isAuthenticated = false;
 
   constructor(private authService: AuthenticationService, private router: Router) {
     this.authService.isAuthenticated().subscribe((data: Auth) => {
