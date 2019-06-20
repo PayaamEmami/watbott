@@ -2,8 +2,8 @@
   <a mat-button routerLink="/" routerLinkActive="active">
     <img class="icon-logo" [src]="watbottPath"> WatBott
   </a>
-  <a *ngIf="isAuthenticated" mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+  <a *ngIf="isAuthenticated" mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   <span class="flex-spacer"></span>
   <a mat-button class="desktop-only" [href]="twitterUrl">
     <mat-icon class="icon-logo" svgIcon="twitter-logo"></mat-icon> Twitter
