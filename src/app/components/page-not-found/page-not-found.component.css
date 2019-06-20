@@ -1,0 +1,23 @@
+p {
+  text-align: center;
+}
+
+.page-not-found {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.image {
+  border-radius: 25px;
+  max-width: 50%;
+  height: auto;
+  margin: 15px;
+}
+
+@media (max-width: 720px) {
+  .image {
+    max-width: 100%;
+  }
+}

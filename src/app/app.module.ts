@@ -20,12 +20,13 @@ import { HomeHeaderComponent } from './components/home/home-header/home-header.c
 import { AboutComponent } from './components/about/about.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: HomeComponent },
-  { path: '**', component: HomeComponent }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -40,6 +41,7 @@ const routes: Routes = [
     AboutComponent,
     PageHeaderComponent,
     DashboardComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
