@@ -8,6 +8,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule, Routes } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,8 +52,10 @@ const routes: Routes = [
     HttpClientModule,
     LayoutModule,
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
     MatMenuModule,
+    MatTabsModule,
     MatToolbarModule,
     RouterModule.forRoot(routes),
   ],
