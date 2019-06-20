@@ -8,10 +8,10 @@
   <a mat-button class="desktop-only" routerLink="/about" routerLinkActive="active">
     About
   </a>
+  <span class="flex-spacer"></span>
   <button mat-button class="desktop-only" [matMenuTriggerFor]="socialMenu" *ngIf="isAuthenticated">
     Socials
   </button>
-  <span class="flex-spacer"></span>
   <a mat-button class="desktop-only" [href]="logoutUrl" *ngIf="isAuthenticated">
     Logout
   </a>
