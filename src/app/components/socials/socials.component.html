@@ -1,0 +1,8 @@
+<a mat-button [href]="twitterUrl" target="_blank">
+  <mat-icon class="icon-image" svgIcon="twitter-logo"></mat-icon>
+  <span *ngIf="showText"> Twitter</span>
+</a>
+<a mat-button [href]="githubUrl" target="_blank">
+  <img [src]="githubImage">
+  <span *ngIf="showText"> GitHub</span>
+</a>

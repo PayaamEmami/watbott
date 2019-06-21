@@ -23,6 +23,7 @@ import { AboutComponent } from './components/about/about.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SocialsComponent } from './components/socials/socials.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
     PageHeaderComponent,
     DashboardComponent,
     PageNotFoundComponent,
+    SocialsComponent,
   ],
   imports: [
     BrowserModule,
