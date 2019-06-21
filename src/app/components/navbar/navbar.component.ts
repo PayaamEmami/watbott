@@ -11,7 +11,7 @@ import { AuthenticationService, Auth } from '../../services/authentication.servi
 export class NavbarComponent implements OnInit {
   twitterUrl = 'https://twitter.com/WatBott';
   githubUrl = 'https://github.com/PayaamEmami/watbott';
-  logoutUrl = 'http://localhost:3000/logout';
+  logoutUrl = 'http://localhost:3000/user/logout';
   githubPath = '../../assets/img/socials/github_white.png';
   watbottPath = '../../assets/img/logo/watbott_background_icon.png';
   isAuthenticated = false;

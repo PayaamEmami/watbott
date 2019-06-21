@@ -89,7 +89,7 @@ app.get(
   })
 );
 
-app.get("/logout", (req, res) => {
+app.get("/user/logout", (req, res) => {
   req.logout();
   res.redirect("http://localhost:4200");
 });
