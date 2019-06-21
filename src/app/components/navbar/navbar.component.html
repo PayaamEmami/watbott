@@ -1,43 +1,46 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
   <a mat-button routerLink="/" routerLinkActive="active">
-    <img class="icon-logo" [src]="watbottPath"> WatBott
-  </a>
-  <a mat-button class="desktop-only" routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated">
-    Dashboard
+    <img class="icon-image" [src]="watbottImage"> WatBott
   </a>
   <a mat-button class="desktop-only" routerLink="/about" routerLinkActive="active">
     About
   </a>
   <span class="flex-spacer"></span>
-  <button mat-button class="desktop-only" [matMenuTriggerFor]="socialMenu" *ngIf="isAuthenticated">
-    Socials
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="isAuthenticated">
+    <img class="icon-image" [src]="userImage">
+    <span class="desktop-only"> {{ username }}</span>
   </button>
-  <a mat-button class="desktop-only" [href]="logoutUrl" *ngIf="isAuthenticated">
-    Logout
+  <a mat-button class="desktop-only" [href]="twitterUrl" target="_blank">
+    <mat-icon class="icon-image" svgIcon="twitter-logo"></mat-icon> Twitter
   </a>
-  <a mat-button class="desktop-only" [href]="twitterUrl" *ngIf="!isAuthenticated">
-    <mat-icon class="icon-logo" svgIcon="twitter-logo"></mat-icon> Twitter
+  <a mat-button class="desktop-only" [href]="githubUrl" target="_blank">
+    <img [src]="githubImage"> GitHub
   </a>
-  <a mat-button class="desktop-only" [href]="githubUrl" *ngIf="!isAuthenticated">
-    <img [src]="githubPath"> GitHub
-  </a>
-  <button mat-button class="mobile-only" [matMenuTriggerFor]="menu">
+  <button mat-button class="mobile-only" [matMenuTriggerFor]="mobileMenu">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated">
-      Dashboard
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item routerLink="/about" routerLinkActive="active">
+      About
     </a>
-    <a mat-menu-item routerLink="/about" routerLinkActive="active">About</a>
     <button mat-menu-item class="mobile-only" [matMenuTriggerFor]="socialMenu">
       Socials
     </button>
-    <a mat-menu-item [href]="logoutUrl" *ngIf="isAuthenticated">
-      Logout
-    </a>
   </mat-menu>
   <mat-menu #socialMenu="matMenu">
-    <a mat-menu-item [href]="twitterUrl">Twitter</a>
-    <a mat-menu-item [href]="githubUrl">GitHub</a>
+    <a mat-menu-item [href]="twitterUrl">
+      Twitter
+    </a>
+    <a mat-menu-item [href]="githubUrl">
+      GitHub
+    </a>
+  </mat-menu>
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item routerLink="/dashboard" routerLinkActive="active">
+      Dashboard
+    </a>
+    <a mat-menu-item [href]="logoutUrl">
+      Logout
+    </a>
   </mat-menu>
 </mat-toolbar>

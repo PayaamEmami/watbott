@@ -68,11 +68,10 @@ passport.use(
 );
 
 app.get("/auth", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
   if (req.user) {
-    res.end(JSON.stringify({ auth: "true" }));
+    res.json({ auth: "true" });
   } else {
-    res.end(JSON.stringify({ auth: "false" }));
+    res.json({ auth: "false" });
   }
 });
 
@@ -94,19 +93,24 @@ app.get("/user/logout", (req, res) => {
   res.redirect("http://localhost:4200");
 });
 
-app.get("/user/username", (req, res) => {
+app.get("/user/info", (req, res) => {
   if (req.user) {
-    res.json({ username: req.user.data[0].display_name });
+    if (req.user.data[0].profile_image_url) {
+      res.json({
+        username: req.user.data[0].display_name,
+        userImage: req.user.data[0].profile_image_url
+      });
+    } else {
+      res.json({
+        username: req.user.data[0].display_name,
+        userImage: null
+      });
+    }
   } else {
-    res.json({ username: null });
-  }
-});
-
-app.get("/user/profileImage", (req, res) => {
-  if (req.user && req.user.data[0].profile_image_url) {
-    res.json({ profileImage: req.user.data[0].profile_image_url });
-  } else {
-    res.json({ profileImage: null });
+    res.json({
+      username: null,
+      userImage: null
+    });
   }
 });
 
