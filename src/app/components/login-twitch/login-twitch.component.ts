@@ -11,6 +11,7 @@ import { AuthenticationService, Auth } from '../../services/authentication.servi
 export class LoginTwitchComponent implements OnInit {
   @Input() icon: string;
   @Input() color: string;
+  @Input() text: string;
   loginUrl = 'http://localhost:3000/auth/twitch';
   isAuthenticated = false;
 

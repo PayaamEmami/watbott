@@ -6,19 +6,12 @@
     About
   </a>
   <span class="flex-spacer"></span>
+  <app-login-twitch text="Login" icon="twitch-logo-purple" color="secondary"></app-login-twitch>
+  <app-socials class="desktop-only" showText="true" *ngIf="!isAuthenticated"></app-socials>
   <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="isAuthenticated">
     <img class="icon-image" [src]="userImage">
     <span class="desktop-only"> {{ username }}</span>
   </button>
-  <app-socials class="desktop-only" showText="true" *ngIf="!isAuthenticated"></app-socials>
-  <mat-menu #socialMenu="matMenu">
-    <a mat-menu-item [href]="twitterUrl">
-      Twitter
-    </a>
-    <a mat-menu-item [href]="githubUrl">
-      GitHub
-    </a>
-  </mat-menu>
   <mat-menu #userMenu="matMenu">
     <a mat-menu-item routerLink="/dashboard" routerLinkActive="active">
       Dashboard
