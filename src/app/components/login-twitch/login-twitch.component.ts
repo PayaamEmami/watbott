@@ -15,14 +15,19 @@ export class LoginTwitchComponent implements OnInit {
   loginUrl = 'http://localhost:3000/auth/twitch';
   isAuthenticated = false;
 
-  constructor(private authService: AuthenticationService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(
+    private authService: AuthenticationService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+
     iconRegistry.addSvgIcon(
-      'twitch-logo-white',
-      sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitch_white.svg')
+      'white-logo',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_white.svg')
     );
+
     iconRegistry.addSvgIcon(
-      'twitch-logo-purple',
-      sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitch_purple.svg')
+      'purple-logo',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_purple.svg')
     );
 
     this.authService.isAuthenticated().subscribe((data: Auth) => {

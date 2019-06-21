@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AboutComponent implements OnInit {
   githubUrl = 'https://github.com/PayaamEmami/watbott';
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
   }

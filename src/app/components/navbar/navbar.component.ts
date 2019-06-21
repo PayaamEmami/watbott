@@ -14,8 +14,9 @@ export class NavbarComponent implements OnInit {
   username = '';
   userImage = '';
 
-  constructor(private authService: AuthenticationService,
-              private userService: UserService) {
+  constructor(
+    private authService: AuthenticationService,
+    private userService: UserService) {
 
     this.authService.isAuthenticated().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;

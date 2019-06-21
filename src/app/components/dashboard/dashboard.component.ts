@@ -10,7 +10,10 @@ import { AuthenticationService, Auth } from '../../services/authentication.servi
 export class DashboardComponent implements OnInit {
   isAuthenticated = false;
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router) {
+
     this.authService.isAuthenticated().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;
 
