@@ -94,6 +94,22 @@ app.get("/logout", (req, res) => {
   res.redirect("http://localhost:4200");
 });
 
+app.get("/user/username", (req, res) => {
+  if (req.user) {
+    res.json({ username: req.user.data[0].display_name });
+  } else {
+    res.json({ username: null });
+  }
+});
+
+app.get("/user/profileImage", (req, res) => {
+  if (req.user && req.user.data[0].profile_image_url) {
+    res.json({ profileImage: req.user.data[0].profile_image_url });
+  } else {
+    res.json({ profileImage: null });
+  }
+});
+
 app.get("/", (req, res) => {
   if (req.session && req.session.passport && req.session.passport.user) {
     res.redirect("http://localhost:4200/dashboard");
