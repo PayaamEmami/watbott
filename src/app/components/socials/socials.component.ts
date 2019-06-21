@@ -13,10 +13,13 @@ export class SocialsComponent implements OnInit {
   githubUrl = 'https://github.com/PayaamEmami/watbott';
   githubImage = '../../assets/img/socials/github_white.png';
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon(
+  constructor(
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer) {
+
+    this.iconRegistry.addSvgIcon(
       'twitter-logo',
-      sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
   }
 

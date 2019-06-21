@@ -17,17 +17,17 @@ export class LoginTwitchComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer) {
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer) {
 
-    iconRegistry.addSvgIcon(
+    this.iconRegistry.addSvgIcon(
       'white-logo',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_white.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_white.svg')
     );
 
-    iconRegistry.addSvgIcon(
+    this.iconRegistry.addSvgIcon(
       'purple-logo',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_purple.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_purple.svg')
     );
 
     this.authService.isAuthenticated().subscribe((data: Auth) => {
