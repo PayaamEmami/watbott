@@ -1,7 +1,14 @@
+mat-tab-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 mat-card {
-  margin: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   max-width: 920px;
+  height: 700px;
+  margin: 12px;
 }
