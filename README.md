@@ -6,7 +6,7 @@ This project is currently in development and not yet ready for production.
 
 WatBott is a virtual assistant (chatbot) for Twitch chat. This project allows users to connect their Twitch account to provide a dashboard where they can connect and configure their WatBott. 
 
-WatBott can understand user's messages and respond. User's messages could be informational questions such as, "how long has this streamer been live?" to silly statements such as, "watbott I know you're just code but I love you!" and WatBott will respond with what *hopefully* would seem like a normal answer (possibly with some twists). 
+WatBott can understand user's messages and respond. User's messages could be informational questions such as, "@WatBott how long has this streamer been live?" to silly statements such as, "watbott I know you're just code but I love you!" and WatBott will respond with what *hopefully* would seem like a normal answer (possibly with some twists). 
 
 Technically, WatBott is a chatbot, but I prefer to use the title "virtual assistant" to hopefully inspire a more forward thinking approach to what new technologies and functionalities that can be brought to Twitch chatbots.
 
