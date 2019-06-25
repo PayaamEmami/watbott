@@ -1,4 +1,4 @@
-# Watbott
+# WatBott
 
 This project is currently in development and not yet ready for production.
 
