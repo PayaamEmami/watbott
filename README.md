@@ -4,7 +4,7 @@ This project is currently in development and not yet ready for production.
 
 ## What does this project do?
 
-WatBott is an AI assistant (chatbot) for Twitch chat. This project allows users to connect their Twitch account to provide a dashboard where they can connect and configure their WatBott. 
+WatBott is an AI assistant (chatbot) for Twitch chat. This project allows users to connect their Twitch account to provide a dashboard where they can connect and configure their assistant. 
 
 In Twitch chat, WatBott can understand user's messages and respond. User's messages could be informational questions such as, "@WatBott how long has this streamer been live?" to silly statements such as, "watbott I know you're just code but I love you!" and WatBott will respond with what *hopefully* would seem like a normal answer (possibly with some twists). 
 
