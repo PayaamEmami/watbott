@@ -5,6 +5,7 @@ const passport = require("passport");
 const OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 const request = require("request");
 const cors = require("cors");
+const mysql = require("mysql");
 const app = express();
 
 app.use(
@@ -61,6 +62,24 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       profile.accessToken = accessToken;
       profile.refreshToken = refreshToken;
+
+      let connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_DATABASE
+      });
+      connection.connect();
+      connection.query(
+        `CALL insertUser` +
+          `('${profile.data[0].login}', ` +
+          `'${profile.accessToken}', ` +
+          `'${profile.refreshToken}')`,
+        error => {
+          if (error) throw error;
+        }
+      );
+      connection.end();
 
       done(null, profile);
     }
