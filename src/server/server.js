@@ -87,8 +87,6 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({ credentials: true, origin: true }));
-app.use('/', routes);
-app.use('/api', api);
 
 app.get(
   "/auth/twitch",
@@ -102,5 +100,8 @@ app.get(
     failureRedirect: "/"
   })
 );
+
+app.use('/api', api);
+app.use('/', routes);
 
 app.listen(process.env.PORT, () => console.log("Server started"));
