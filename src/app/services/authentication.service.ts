@@ -27,7 +27,7 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    return this.http.get<Auth>('http://localhost:3000/auth',
+    return this.http.get<Auth>('/api/authenticated',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)

@@ -28,7 +28,7 @@ export class UserService {
   }
 
   getInfo() {
-    return this.http.get<User>('http://localhost:3000/user/info',
+    return this.http.get<User>('/api/user/info',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)

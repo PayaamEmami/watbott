@@ -59,7 +59,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "watbott:build"
+            "browserTarget": "watbott:build",
+            "proxyConfig": "src/proxy.conf.js"
           },
           "configurations": {
             "production": {

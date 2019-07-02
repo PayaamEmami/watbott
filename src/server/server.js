@@ -7,18 +7,8 @@ const request = require("request");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-  })
-);
-app.use(express.static("public"));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(cors({ credentials: true, origin: true }));
+const routes = require('./routes/routes');
+const api = require('./routes/api');
 
 OAuth2Strategy.prototype.userProfile = (accessToken, done) => {
   var options = {
@@ -86,13 +76,19 @@ passport.use(
   )
 );
 
-app.get("/auth", (req, res) => {
-  if (req.user) {
-    res.json({ auth: "true" });
-  } else {
-    res.json({ auth: "false" });
-  }
-});
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(express.static("public"));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cors({ credentials: true, origin: true }));
+app.use('/', routes);
+app.use('/api', api);
 
 app.get(
   "/auth/twitch",
@@ -106,39 +102,5 @@ app.get(
     failureRedirect: "/"
   })
 );
-
-app.get("/user/logout", (req, res) => {
-  req.logout();
-  res.redirect("http://localhost:4200");
-});
-
-app.get("/user/info", (req, res) => {
-  if (req.user) {
-    if (req.user.data[0].profile_image_url) {
-      res.json({
-        username: req.user.data[0].display_name,
-        userImage: req.user.data[0].profile_image_url
-      });
-    } else {
-      res.json({
-        username: req.user.data[0].display_name,
-        userImage: null
-      });
-    }
-  } else {
-    res.json({
-      username: null,
-      userImage: null
-    });
-  }
-});
-
-app.get("/", (req, res) => {
-  if (req.session && req.session.passport && req.session.passport.user) {
-    res.redirect("http://localhost:4200/dashboard");
-  } else {
-    res.redirect("http://localhost:4200");
-  }
-});
 
 app.listen(process.env.PORT, () => console.log("Server started"));

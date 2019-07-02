@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, Auth } from '../../services/authentication.service';
-import { UserService, User } from '../../services/user.service';
+import { UserService, User } from './../../services/user.service';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { UserService, User } from '../../services/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  logoutUrl = 'http://localhost:3000/user/logout';
+  logoutUrl = environment.baseUrl + '/api/user/logout';
   watbottImage = '../../assets/img/logo/watbott_background_icon.png';
   isAuthenticated = false;
   username = '';

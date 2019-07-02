@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { AuthenticationService, Auth } from '../../services/authentication.service';
+import { AuthenticationService, Auth } from './../../services/authentication.service';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-login-twitch',
@@ -12,7 +13,7 @@ export class LoginTwitchComponent implements OnInit {
   @Input() icon: string;
   @Input() color: string;
   @Input() text: string;
-  loginUrl = 'http://localhost:3000/auth/twitch';
+  loginUrl = environment.baseUrl + '/auth/twitch';
   isAuthenticated = false;
 
   constructor(
