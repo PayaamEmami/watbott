@@ -1,7 +1,7 @@
 const express = require("express");
 const api = express.Router();
 
-api.get("/authenticated", (req, res) => {
+api.get("/user/auth", (req, res) => {
   if (req.user) {
     res.json({ auth: "true" });
   } else {
