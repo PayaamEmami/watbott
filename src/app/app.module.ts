@@ -13,24 +13,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginTwitchComponent } from './components/login-twitch/login-twitch.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SocialsComponent } from './components/socials/socials.component';
+import { LoginTwitchComponent } from './components/login-twitch/login-twitch.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
 import { HomePromoComponent } from './components/home/home-promo/home-promo.component';
 import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
 import { AboutComponent } from './components/about/about.component';
-import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { SocialsComponent } from './components/socials/socials.component';
-
-const routes: Routes = [
-  { path: 'about', component: AboutComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: '', component: HomeComponent },
-  { path: '**', component: PageNotFoundComponent }
-];
 
 @NgModule({
   declarations: [
@@ -59,7 +52,6 @@ const routes: Routes = [
     MatMenuModule,
     MatTabsModule,
     MatToolbarModule,
-    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
