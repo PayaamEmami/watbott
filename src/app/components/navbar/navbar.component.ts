@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, Auth } from '../../services/authentication.service';
+import { AuthService, Auth } from '../../services/auth.service';
 import { UserService, User } from './../../services/user.service';
 import { environment } from './../../../environments/environment';
 
@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   userImage = '';
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private userService: UserService) {
 
     this.authService.getAuth().subscribe((data: Auth) => {

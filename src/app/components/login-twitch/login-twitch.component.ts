@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { AuthenticationService, Auth } from './../../services/authentication.service';
+import { AuthService, Auth } from '../../services/auth.service';
 import { environment } from './../../../environments/environment';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginTwitchComponent implements OnInit {
   isAuthenticated = false;
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
 

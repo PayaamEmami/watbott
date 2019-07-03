@@ -10,7 +10,7 @@ export interface Auth {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthService {
   isAuthenticated = false;
 
   constructor(private http: HttpClient) {
