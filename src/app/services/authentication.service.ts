@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface Auth {
@@ -11,8 +11,13 @@ export interface Auth {
   providedIn: 'root'
 })
 export class AuthenticationService {
+  isAuthenticated = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getAuth().subscribe((data: Auth) => {
+      this.isAuthenticated = (data.auth === 'true') ? true : false;
+    });
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -26,7 +31,7 @@ export class AuthenticationService {
       'Something bad happened; please try again later.');
   }
 
-  isAuthenticated() {
+  getAuth(): Observable<any> {
     return this.http.get<Auth>('/api/user/auth',
       { withCredentials: true, responseType: 'json' })
       .pipe(

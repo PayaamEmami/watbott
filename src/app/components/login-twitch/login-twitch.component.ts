@@ -31,7 +31,7 @@ export class LoginTwitchComponent implements OnInit {
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_purple.svg')
     );
 
-    this.authService.isAuthenticated().subscribe((data: Auth) => {
+    this.authService.getAuth().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;
     });
   }

@@ -9,5 +9,7 @@ export class HomePromoComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
 }
