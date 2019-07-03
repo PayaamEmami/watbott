@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { AuthService, Auth } from '../../services/auth.service';
+import { AuthService, Auth } from './../../services/auth.service';
 import { environment } from './../../../environments/environment';
 
 @Component({
@@ -21,19 +21,19 @@ export class LoginTwitchComponent implements OnInit {
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
 
-    this.iconRegistry.addSvgIcon(
-      'white-logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_white.svg')
-    );
-
-    this.iconRegistry.addSvgIcon(
-      'purple-logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/socials/twitch_purple.svg')
-    );
-
     this.authService.getAuth().subscribe((data: Auth) => {
       this.isAuthenticated = (data.auth === 'true') ? true : false;
     });
+
+    this.iconRegistry.addSvgIcon(
+      'twitch-white',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/twitch/white.svg')
+    );
+
+    this.iconRegistry.addSvgIcon(
+      'twitch-purple',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/twitch/purple.svg')
+    );
   }
 
   ngOnInit() {
