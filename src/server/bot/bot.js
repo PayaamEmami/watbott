@@ -1,5 +1,6 @@
 require("dotenv").config();
 const chat = require("./chat");
+const database = require("./database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
@@ -12,7 +13,6 @@ let opts = {
   channels: []
 };
 let twitchClient = new tmi.client(opts);
-let sessionId;
 
 module.exports.connect = async channelName => {
   try {
@@ -25,14 +25,15 @@ module.exports.connect = async channelName => {
 
 module.exports.disconnect = async channelName => {
   try {
-    let tempOpts = {
+    const tempOpts = {
       identity: {
         username: process.env.TWITCH_BOT_USERNAME,
         password: process.env.TWITCH_OAUTH_TOKEN
       },
       channels: [channelName]
     };
-    let tempClient = new tmi.client(tempOpts);
+    const tempClient = new tmi.client(tempOpts);
+    const sessionId = database.getSessionId(profile.data[0].login);
 
     tempClient.disconnect();
 
@@ -45,11 +46,13 @@ module.exports.disconnect = async channelName => {
 };
 
 twitchClient.on("connected", (address, port) => {
+  // DEV ONLY
   console.log(`* Connected to ${address}:${port}`);
+
   watson
     .createSession()
     .then(res => {
-      sessionId = res.session_id;
+      database.setSessionId(res.session_id);
     })
     .catch(err => {
       console.error(err);
@@ -62,6 +65,8 @@ twitchClient.on("message", (channel, userstate, message, self) => {
   }
 
   if (message.toLowerCase().includes(process.env.TWITCH_BOT_USERNAME)) {
+    const sessionId = database.getSessionId(profile.data[0].login);
+
     watson
       .message(message, sessionId)
       .then(res => {
@@ -85,7 +90,11 @@ twitchClient.on("message", (channel, userstate, message, self) => {
 });
 
 twitchClient.on("disconnected", reason => {
+  // DEV ONLY
   console.log(`* Disconnected: ${reason}`);
+
+  const sessionId = database.getSessionId(profile.data[0].login);
+
   watson
     .deleteSession(sessionId)
     .then(res => {
