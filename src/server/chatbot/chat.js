@@ -2,12 +2,12 @@ const twitch = require("./twitch");
 
 require("dotenv").config();
 
-module.exports.message = (twitchClient, channel, response) => {
+module.exports.say = (twitchClient, channel, response) => {
   twitchClient.say(channel, response);
 };
 
 module.exports.ending = (twitchClient, channel, userstate, response) => {
-  this.message(twitchClient, channel, response);
+  this.say(twitchClient, channel, response);
   if (userstate.username == process.env.TWITCH_CHANNEL_USERNAME) {
     twitchClient.disconnect();
   }

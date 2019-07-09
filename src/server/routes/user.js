@@ -1,7 +1,7 @@
 const express = require("express");
-const api = express.Router();
+const user = express.Router();
 
-api.get("/user/auth", (req, res) => {
+user.get("/auth", (req, res) => {
   if (req.user) {
     res.json({ auth: "true" });
   } else {
@@ -9,12 +9,12 @@ api.get("/user/auth", (req, res) => {
   }
 });
 
-api.get("/user/logout", (req, res) => {
+user.get("/logout", (req, res) => {
   req.logout();
   res.redirect(process.env.BASE_URL);
 });
 
-api.get("/user/info", (req, res) => {
+user.get("/info", (req, res) => {
   if (req.user) {
     if (req.user.data[0].profile_image_url) {
       res.json({
@@ -35,5 +35,4 @@ api.get("/user/info", (req, res) => {
   }
 });
 
-
-module.exports = api;
+module.exports = user;

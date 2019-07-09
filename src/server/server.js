@@ -5,7 +5,8 @@ const OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 const cors = require("cors");
 const app = express();
 const routes = require('./routes/routes');
-const api = require('./routes/api');
+const user = require('./routes/user');
+const bot = require('./routes/bot');
 
 require("dotenv").config();
 require("./passport")(passport, OAuth2Strategy);
@@ -35,7 +36,8 @@ app.get(
   })
 );
 
-app.use('/api', api);
+app.use('/api/user', user);
+app.use('/api/bot', bot);
 app.use('/', routes);
 
 app.listen(process.env.PORT, () => console.log("Server started"));

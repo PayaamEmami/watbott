@@ -1,5 +1,5 @@
 const chat = require("./chat");
-const database = require("./../database");
+const database = require("../database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
@@ -81,7 +81,7 @@ twitchClient.on("message", (channel, userstate, message, self) => {
             chat.ending(twitchClient, channel, userstate, response);
             break;
           default:
-            chat.message(twitchClient, channel, response);
+            chat.say(twitchClient, channel, response);
         }
       })
       .catch(err => {
