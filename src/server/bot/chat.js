@@ -1,5 +1,6 @@
-require("dotenv").config();
 const twitch = require("./twitch");
+
+require("dotenv").config();
 
 module.exports.message = (twitchClient, channel, response) => {
   twitchClient.say(channel, response);

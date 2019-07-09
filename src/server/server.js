@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
@@ -8,6 +7,7 @@ const app = express();
 const routes = require('./routes/routes');
 const api = require('./routes/api');
 
+require("dotenv").config();
 require("./passport")(passport, OAuth2Strategy);
 
 app.use(

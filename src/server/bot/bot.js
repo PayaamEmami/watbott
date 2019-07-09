@@ -1,9 +1,10 @@
-require("dotenv").config();
 const chat = require("./chat");
 const database = require("./database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
+
+require("dotenv").config();
 
 let opts = {
   identity: {

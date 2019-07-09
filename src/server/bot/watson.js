@@ -1,5 +1,6 @@
-require("dotenv").config();
 const AssistantV2 = require("ibm-watson/assistant/v2");
+
+require("dotenv").config();
 
 const service = new AssistantV2({
   iam_apikey: process.env.WATSON_API_KEY,
