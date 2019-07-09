@@ -1,5 +1,3 @@
-const passport = require("passport");
-const OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 const request = require("request");
 const mysql = require("mysql");
 
