@@ -1,5 +1,5 @@
 const chat = require("./chat");
-const database = require("./database");
+const database = require("./../database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
