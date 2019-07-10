@@ -46,6 +46,14 @@ module.exports.disconnect = async channelName => {
   }
 };
 
+module.exports.isConnected = channelName => {
+  if (opts.channels.includes(channelName)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 twitchClient.on("connected", (address, port) => {
   // DEV ONLY
   console.log(`* Connected to ${address}:${port}`);

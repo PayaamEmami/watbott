@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatMenuModule,
     MatTabsModule,
     MatToolbarModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

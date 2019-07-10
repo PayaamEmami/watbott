@@ -14,4 +14,12 @@ bot.get("/disconnect", (req, res) => {
   }
 });
 
+bot.get("/isConnected", (req, res) => {
+  if (chatbot.isConnected) {
+    res.json({ connected: "true" });
+  } else {
+    res.json({ connected: "false" });
+  }
+})
+
 module.exports = bot;
