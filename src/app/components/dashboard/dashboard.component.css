@@ -1,14 +1,33 @@
-mat-tab-group {
+mat-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-width: 650px;
+  min-height: 700px;
+  margin: 12px;
+}
+
+mat-divider {
+  margin: 12px 0px;
+}
+
+.card-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-mat-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 920px;
-  height: 700px;
-  margin: 12px;
+.connect {
+  background: green;
+}
+
+.disconnect {
+  background: red;
+}
+
+@media (max-width: 720px) {
+  mat-card {
+    min-width: 250px;
+    min-height: 550px;
+  }
 }

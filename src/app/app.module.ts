@@ -8,7 +8,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +23,7 @@ import { HomePromoComponent } from './components/home/home-promo/home-promo.comp
 import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -50,9 +50,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatCardModule,
     MatIconModule,
     MatMenuModule,
-    MatTabsModule,
     MatToolbarModule,
     MatChipsModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
