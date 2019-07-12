@@ -16,7 +16,7 @@ export class BotService {
   constructor(private http: HttpClient) {
     this.isInChannel().subscribe((data: Bot) => {
       this.isConnected = data.isInChannel;
-    })
+    });
   }
 
   private handleError(error: HttpErrorResponse) {
