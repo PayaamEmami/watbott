@@ -22,7 +22,7 @@ export class LoginTwitchComponent implements OnInit {
     private sanitizer: DomSanitizer) {
 
     this.authService.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = (data.auth === 'true') ? true : false;
+      this.isAuthenticated = data.auth;
     });
 
     this.iconRegistry.addSvgIcon(

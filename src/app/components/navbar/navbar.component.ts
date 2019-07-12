@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     private userService: UserService) {
 
     this.authService.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = (data.auth === 'true') ? true : false;
+      this.isAuthenticated = data.auth;
     });
 
     this.userService.getInfo().subscribe((data: User) => {

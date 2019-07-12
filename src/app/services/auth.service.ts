@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface Auth {
-  auth: string;
+  auth: boolean;
 }
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = (data.auth === 'true') ? true : false;
+      this.isAuthenticated = data.auth;
     });
   }
 

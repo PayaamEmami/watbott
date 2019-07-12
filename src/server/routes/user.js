@@ -3,9 +3,9 @@ const user = express.Router();
 
 user.get("/auth", (req, res) => {
   if (req.user) {
-    res.json({ auth: "true" });
+    res.json({ auth: true });
   } else {
-    res.json({ auth: "false" });
+    res.json({ auth: false });
   }
 });
 
