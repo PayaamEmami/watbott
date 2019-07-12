@@ -6,14 +6,14 @@ const watson = require("./watson");
 
 require("dotenv").config();
 
-let opts = {
+const opts = {
   identity: {
     username: process.env.TWITCH_BOT_USERNAME,
     password: process.env.TWITCH_OAUTH_TOKEN
   },
   channels: []
 };
-let twitchClient = new tmi.client(opts);
+const twitchClient = new tmi.client(opts);
 
 twitchClient.connect();
 
@@ -65,9 +65,9 @@ twitchClient.on("part", (channel, username, self) => {
     });
 });
 
-twitchClient.on("message", (channel, userstate, message, self) => {
+twitchClient.on("chat", (channel, userstate, message, self) => {
   if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_USERNAME)) {
-    const sessionId = database.getSessionId(profile.data[0].login);
+    const sessionId = database.getSessionId(userstate["username"]);
 
     watson
       .message(message, sessionId)
