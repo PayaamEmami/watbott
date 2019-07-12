@@ -66,11 +66,7 @@ twitchClient.on("part", (channel, username, self) => {
 });
 
 twitchClient.on("message", (channel, userstate, message, self) => {
-  if (self) {
-    return;
-  }
-
-  if (message.toLowerCase().includes(process.env.TWITCH_BOT_USERNAME)) {
+  if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_USERNAME)) {
     const sessionId = database.getSessionId(profile.data[0].login);
 
     watson
