@@ -15,53 +15,52 @@ let opts = {
 };
 let twitchClient = new tmi.client(opts);
 
-module.exports.connect = async channelName => {
+twitchClient.connect();
+
+module.exports.join = async channelName => {
   try {
     this.opts.channels = this.opts.channels.push(channelName);
-    twitchClient.connect();
+    twitchClient.join(channelName);
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports.disconnect = async channelName => {
+module.exports.part = async channelName => {
   try {
-    const tempOpts = {
-      identity: {
-        username: process.env.TWITCH_BOT_USERNAME,
-        password: process.env.TWITCH_OAUTH_TOKEN
-      },
-      channels: [channelName]
-    };
-    const tempClient = new tmi.client(tempOpts);
-    const sessionId = database.getSessionId(profile.data[0].login);
-
-    tempClient.disconnect();
-
-    watson.deleteSession(sessionId);
-
     this.opts.channels.splice(this.opts.channels.indexOf(channelName), 1);
+    twitchClient.part(channelName);
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports.isConnected = channelName => {
+module.exports.isInChannel = channelName => {
   if (opts.channels.includes(channelName)) {
     return true;
   } else {
     return false;
   }
-}
+};
 
-twitchClient.on("connected", (address, port) => {
-  // DEV ONLY
-  console.log(`* Connected to ${address}:${port}`);
-
+twitchClient.on("join", (channel, username, self) => {
   watson
     .createSession()
     .then(res => {
-      database.setSessionId(res.session_id);
+      database.setSessionId(channel, res.session_id);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+});
+
+twitchClient.on("part", (channel, username, self) => {
+  const sessionId = database.getSessionId(channel);
+
+  watson
+    .deleteSession(sessionId)
+    .then(res => {
+      console.log("* Watson session deleted.");
     })
     .catch(err => {
       console.error(err);
@@ -96,20 +95,4 @@ twitchClient.on("message", (channel, userstate, message, self) => {
         console.error(err);
       });
   }
-});
-
-twitchClient.on("disconnected", reason => {
-  // DEV ONLY
-  console.log(`* Disconnected: ${reason}`);
-
-  const sessionId = database.getSessionId(profile.data[0].login);
-
-  watson
-    .deleteSession(sessionId)
-    .then(res => {
-      console.log("* Watson session deleted.");
-    })
-    .catch(err => {
-      console.error(err);
-    });
 });

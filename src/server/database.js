@@ -7,12 +7,12 @@ const connection = mysql.createConnection({
   database: process.env.DB_DATABASE
 });
 
-module.exports.getSessionId = () => {
+module.exports.getSessionId = channelName => {
   let sessionId = null;
 
   connection.connect();
   connection.query(
-    `SELECT session_id FROM user WHERE user.login='${profile.data[0].login}'`,
+    `SELECT session_id FROM user WHERE user.login='${channelName}'`,
     (error, results) => {
       if (error) throw error;
       sessionId = results[0].session_id;
@@ -23,11 +23,11 @@ module.exports.getSessionId = () => {
   return sessionId;
 };
 
-module.exports.setSessionId = sessionId => {
+module.exports.setSessionId = (channelName, sessionId) => {
   connection.connect();
   connection.query(
     `CALL insertWatsonSession` +
-      `('${profile.data[0].login}', ` +
+      `('${channelName}', ` +
       `'${sessionId}')`,
     error => {
       if (error) throw error;
