@@ -16,9 +16,9 @@ bot.get("/part", (req, res) => {
 
 bot.get("/isInChannel", (req, res) => {
   if (chatbot.isInChannel(req.user.data[0].display_name)) {
-    res.json({ connected: "true" });
+    res.json({ isInChannel: "true" });
   } else {
-    res.json({ connected: "false" });
+    res.json({ isInChannel: "false" });
   }
 })
 
