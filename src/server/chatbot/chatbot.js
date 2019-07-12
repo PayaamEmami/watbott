@@ -19,7 +19,6 @@ twitchClient.connect();
 
 module.exports.join = async channelName => {
   try {
-    this.opts.channels = this.opts.channels.push(channelName);
     twitchClient.join(channelName);
   } catch (err) {
     console.error(err);
@@ -28,7 +27,6 @@ module.exports.join = async channelName => {
 
 module.exports.part = async channelName => {
   try {
-    this.opts.channels.splice(this.opts.channels.indexOf(channelName), 1);
     twitchClient.part(channelName);
   } catch (err) {
     console.error(err);
@@ -36,7 +34,7 @@ module.exports.part = async channelName => {
 };
 
 module.exports.isInChannel = channelName => {
-  if (opts.channels.includes(channelName)) {
+  if (twitchClient.getChannels().includes(channelName)) {
     return true;
   } else {
     return false;
