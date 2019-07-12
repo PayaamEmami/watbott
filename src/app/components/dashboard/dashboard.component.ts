@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BotService, Bot } from './../../services/bot.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isConnected = false;
 
-  constructor() { }
+  constructor(private botService: BotService) {
+    this.botService.isInChannel().subscribe((data: Bot) => {
+      this.isConnected = data.isInChannel;
+    });
+   }
 
   ngOnInit() {
   }
