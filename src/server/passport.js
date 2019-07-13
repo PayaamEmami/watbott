@@ -1,5 +1,5 @@
 const request = require("request");
-const mysql = require("mysql");
+const database = require("./database");
 
 module.exports = (passport, OAuth2Strategy) => {
   OAuth2Strategy.prototype.userProfile = (accessToken, done) => {
@@ -45,23 +45,11 @@ module.exports = (passport, OAuth2Strategy) => {
         profile.accessToken = accessToken;
         profile.refreshToken = refreshToken;
 
-        let connection = mysql.createConnection({
-          host: process.env.DB_HOST,
-          user: process.env.DB_USER,
-          password: process.env.DB_PASS,
-          database: process.env.DB_DATABASE
-        });
-        connection.connect();
-        connection.query(
-          `CALL insertUser` +
-            `('${profile.data[0].login}', ` +
-            `'${profile.accessToken}', ` +
-            `'${profile.refreshToken}')`,
-          error => {
-            if (error) throw error;
-          }
+        database.insertUser(
+          profile.data[0].login,
+          profile.accessToken,
+          profile.refreshToken
         );
-        connection.end();
 
         done(null, profile);
       }

@@ -6,12 +6,14 @@ bot.get("/join", (req, res) => {
   if (req.user) {
     chatbot.join(req.user.data[0].display_name);
   }
+  res.redirect(process.env.BASE_URL);
 });
 
 bot.get("/part", (req, res) => {
   if (req.user) {
     chatbot.part(req.user.data[0].display_name);
   }
+  res.redirect(process.env.BASE_URL);
 });
 
 bot.get("/isInChannel", (req, res) => {
