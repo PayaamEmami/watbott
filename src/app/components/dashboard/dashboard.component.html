@@ -3,16 +3,12 @@
   <mat-card>
     <mat-card-content>
       <mat-chip-list>
-        <a [href]="connectUrl">
-          <mat-chip class="connect" *ngIf="!isConnected">
-            Connect to chat
-          </mat-chip>
-        </a>
-        <a [href]="disconnectUrl">
-          <mat-chip class="disconnect" *ngIf="isConnected">
-            Disconnect from chat
-          </mat-chip>
-        </a>
+        <mat-chip class="connect" *ngIf="!isConnected">
+          Connect to chat
+        </mat-chip>
+        <mat-chip class="disconnect" *ngIf="isConnected">
+          Disconnect from chat
+        </mat-chip>
       </mat-chip-list>
       <mat-divider></mat-divider>
     </mat-card-content>

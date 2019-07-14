@@ -9,8 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent implements OnInit {
   isConnected = false;
-  connectUrl = environment.baseUrl + '/api/bot/join';
-  disconnectUrl = environment.baseUrl + '/api/bot/part';
 
   constructor(private botService: BotService) {
     this.botService.isInChannel().subscribe((data: Bot) => {

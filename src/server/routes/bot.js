@@ -2,18 +2,20 @@ const express = require("express");
 const bot = express.Router();
 const chatbot = require("./../chatbot/chatbot");
 
-bot.get("/join", (req, res) => {
+bot.put("/join", (req, res) => {
   if (req.user) {
     chatbot.join(req.user.data[0].display_name);
+    res.status(204).end();
   }
-  res.redirect(process.env.BASE_URL);
+  res.status(404).end();
 });
 
-bot.get("/part", (req, res) => {
+bot.put("/part", (req, res) => {
   if (req.user) {
     chatbot.part(req.user.data[0].display_name);
+    res.status(204).end();
   }
-  res.redirect(process.env.BASE_URL);
+  res.status(404).end();
 });
 
 bot.get("/isInChannel", (req, res) => {
