@@ -8,14 +8,14 @@ module.exports.say = (twitchClient, channel, response) => {
 
 module.exports.ending = (twitchClient, channel, userstate, response) => {
   this.say(twitchClient, channel, response);
-  if (userstate.username == process.env.TWITCH_CHANNEL_USERNAME) {
+  if (userstate.username == channel) {
     twitchClient.disconnect();
   }
 };
 
 module.exports.upTime = (twitchClient, channel) => {
   twitch
-    .getStream()
+    .getStream(channel)
     .then(res => {
       return res.json();
     })
@@ -24,14 +24,12 @@ module.exports.upTime = (twitchClient, channel) => {
         let time = new Date(Date.now() - Date.parse(json.data[0].started_at));
         twitchClient.say(
           channel,
-          `${
-            process.env.TWITCH_CHANNEL_USERNAME
-          } has been live for ${time.getUTCHours()} hours and ${time.getUTCMinutes()} minutes.`
+          `${channel} has been live for ${time.getUTCHours()} hours and ${time.getUTCMinutes()} minutes.`
         );
       } else {
         twitchClient.say(
           channel,
-          `${process.env.TWITCH_CHANNEL_USERNAME} is currently offline.`
+          `${channel} is currently offline.`
         );
       }
     });

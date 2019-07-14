@@ -45,7 +45,7 @@ module.exports = (passport, OAuth2Strategy) => {
         profile.accessToken = accessToken;
         profile.refreshToken = refreshToken;
 
-        database.insertUser(
+        database.setUser(
           profile.data[0].login,
           profile.accessToken,
           profile.refreshToken

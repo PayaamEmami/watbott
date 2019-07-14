@@ -11,7 +11,7 @@
   <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="isAuthenticated">
     <mat-icon *ngIf="!userImage">person</mat-icon>
     <img class="icon-image" [src]="userImage" *ngIf="userImage">
-    <span class="desktop-only"> {{ username }}</span>
+    <span class="desktop-only"> {{ userLogin }}</span>
   </button>
   <mat-menu #userMenu="matMenu">
     <a mat-menu-item routerLink="/dashboard" routerLinkActive="active">

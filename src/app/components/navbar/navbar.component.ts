@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   logoutUrl = environment.baseUrl + '/api/user/logout';
   watbottImage = '../../assets/img/logo/watbott_background_icon.png';
   isAuthenticated = false;
-  username = '';
+  userLogin = '';
   userImage = '';
 
   constructor(
@@ -24,8 +24,8 @@ export class NavbarComponent implements OnInit {
     });
 
     this.userService.getInfo().subscribe((data: User) => {
-      this.username = data.username;
-      this.userImage = data.userImage;
+      this.userLogin = data.login;
+      this.userImage = data.image;
     });
   }
 

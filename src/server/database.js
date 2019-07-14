@@ -9,32 +9,28 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-module.exports.insertUser = (login, accessToken, refreshToken) => {
+module.exports.setUser = (login, accessToken, refreshToken) => {
   connection.query(
-    `CALL insertUser('${login}', '${accessToken}', '${refreshToken}')`,
+    `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
     error => {
       if (error) throw error;
     }
   );
 };
 
-module.exports.getSessionId = channelName => {
-  let sessionId = null;
-
+module.exports.getSessionId = login => {
   connection.query(
-    `SELECT session_id FROM users WHERE users.login='${channelName}'`,
+    `CALL getSessionId('${login}')`,
     (error, results) => {
       if (error) throw error;
-      sessionId = results[0].session_id;
+      return results[0].session_id;
     }
   );
-
-  return sessionId;
 };
 
-module.exports.setSessionId = (channelName, sessionId) => {
+module.exports.setSessionId = (login, sessionId) => {
   connection.query(
-    `CALL insertWatsonSession('${channelName}', '${sessionId}')`,
+    `CALL setSessionId('${login}', '${sessionId}')`,
     error => {
       if (error) throw error;
     }

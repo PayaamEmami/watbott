@@ -4,8 +4,8 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface User {
-  username: string;
-  userImage: string;
+  login: string;
+  image: string;
 }
 
 @Injectable({

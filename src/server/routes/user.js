@@ -18,19 +18,19 @@ user.get("/info", (req, res) => {
   if (req.user) {
     if (req.user.data[0].profile_image_url) {
       res.json({
-        username: req.user.data[0].display_name,
-        userImage: req.user.data[0].profile_image_url
+        login: req.user.data[0].display_name,
+        image: req.user.data[0].profile_image_url
       });
     } else {
       res.json({
-        username: req.user.data[0].display_name,
-        userImage: null
+        login: req.user.data[0].display_name,
+        image: null
       });
     }
   } else {
     res.json({
-      username: null,
-      userImage: null
+      login: null,
+      image: null
     });
   }
 });

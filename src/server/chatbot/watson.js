@@ -47,5 +47,5 @@ module.exports.deleteSession = async session_id => {
 };
 
 function filterMessage(message) {
-  return message.replace(`@*${process.env.TWITCH_BOT_USERNAME}`, "").trim();
+  return message.replace(`@*${process.env.TWITCH_BOT_NAME}`, "").trim();
 }
