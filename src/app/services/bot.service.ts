@@ -38,4 +38,20 @@ export class BotService {
         catchError(this.handleError)
       );
   }
+
+  joinChannel(): void {
+    this.http.put('/api/bot/join', { observe: 'response' })
+      .subscribe(res => {
+        console.log(res);
+        this.isConnected = true;
+      });
+  }
+
+  partChannel(): void {
+    this.http.put('/api/bot/part', { observe: 'response' })
+      .subscribe(res => {
+        console.log(res);
+        this.isConnected = false;
+      });
+  }
 }

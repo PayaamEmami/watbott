@@ -14,9 +14,16 @@ export class DashboardComponent implements OnInit {
     this.botService.isInChannel().subscribe((data: Bot) => {
       this.isConnected = data.isInChannel;
     });
-   }
+  }
 
   ngOnInit() {
   }
 
+  joinChannel(): void {
+    this.botService.joinChannel();
+  }
+
+  partChannel(): void {
+    this.botService.partChannel();
+  }
 }
