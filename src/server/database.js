@@ -1,16 +1,14 @@
 const mysql = require("mysql");
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_DATABASE
 });
 
-connection.connect();
-
 module.exports.setUser = (login, accessToken, refreshToken) => {
-  connection.query(
+  pool.query(
     `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
     error => {
       if (error) throw error;
@@ -19,7 +17,7 @@ module.exports.setUser = (login, accessToken, refreshToken) => {
 };
 
 module.exports.getSessionId = login => {
-  connection.query(
+  pool.query(
     `CALL getSessionId('${login}')`,
     (error, results) => {
       if (error) throw error;
@@ -29,7 +27,7 @@ module.exports.getSessionId = login => {
 };
 
 module.exports.setSessionId = (login, sessionId) => {
-  connection.query(
+  pool.query(
     `CALL setSessionId('${login}', '${sessionId}')`,
     error => {
       if (error) throw error;
