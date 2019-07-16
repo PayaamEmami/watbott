@@ -4,12 +4,12 @@
   "main": "src/server/server.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "angular": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "nodemon src/server/server.js"
+    "server": "nodemon src/server/server.js"
   },
   "private": true,
   "dependencies": {
