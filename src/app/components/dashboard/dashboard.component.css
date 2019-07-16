@@ -18,11 +18,11 @@ mat-divider {
 }
 
 .connect {
-  background: green;
+  background: #00e500;
 }
 
 .disconnect {
-  background: red;
+  background: #ff0000;
 }
 
 @media (max-width: 720px) {
