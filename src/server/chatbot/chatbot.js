@@ -34,7 +34,7 @@ module.exports.part = async channel => {
 };
 
 module.exports.isInChannel = channel => {
-  if (twitchClient.getChannels().includes(channel)) {
+  if (twitchClient.getChannels().includes('#' + channel)) {
     return true;
   } else {
     return false;
@@ -68,28 +68,26 @@ twitchClient.on("part", (channel, username, self) => {
 twitchClient.on("chat", (channel, userstate, message, self) => {
   if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
     database.getSessionId(userstate["username"], sessionId => {
-      if (sessionId) {
-        watson
-          .message(message, sessionId)
-          .then(res => {
-            let chatMessage = res.output.generic[0].text;
-            let intent = res.output.intents[0].intent;
+      watson
+        .message(message, sessionId)
+        .then(res => {
+          let userIntent = res.output.intents[0].intent;
+          let watsonResponse = res.output.generic[0].text;
 
-            switch (intent) {
-              case "Twitch_Uptime":
-                chat.upTime(twitchClient, channel);
-                break;
-              case "General_Ending":
-                chat.ending(twitchClient, channel, userstate, chatMessage);
-                break;
-              default:
-                chat.say(twitchClient, channel, chatMessage);
-            }
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      }
+          switch (userIntent) {
+            case "Twitch_Uptime":
+              chat.upTime(twitchClient, channel);
+              break;
+            case "General_Ending":
+              chat.ending(twitchClient, channel, userstate, watsonResponse);
+              break;
+            default:
+              chat.say(twitchClient, channel, watsonResponse);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
     });
   }
 });
