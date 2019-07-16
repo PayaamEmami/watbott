@@ -31,14 +31,6 @@ export class BotService {
       'Something bad happened; please try again later.');
   }
 
-  isInChannel(): Observable<any> {
-    return this.http.get<Bot>('/api/bot/isInChannel',
-      { withCredentials: true, responseType: 'json' })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
   joinChannel(): void {
     this.http.put('/api/bot/join', { observe: 'response' })
       .subscribe(res => {
@@ -53,5 +45,13 @@ export class BotService {
         console.log(res);
         this.isConnected = false;
       });
+  }
+
+  isInChannel(): Observable<any> {
+    return this.http.get<Bot>('/api/bot/isInChannel',
+      { withCredentials: true, responseType: 'json' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

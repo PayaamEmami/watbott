@@ -8,6 +8,8 @@ const pool = mysql.createPool({
 });
 
 module.exports.setUser = (login, accessToken, refreshToken) => {
+  login = filterLogin(login);
+
   pool.query(
     `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
     error => {
@@ -16,21 +18,23 @@ module.exports.setUser = (login, accessToken, refreshToken) => {
   );
 };
 
-module.exports.getSessionId = login => {
-  pool.query(
-    `CALL getSessionId('${login}')`,
-    (error, results) => {
-      if (error) throw error;
-      return results[0].session_id;
-    }
-  );
+module.exports.getSessionId = (login, callback) => {
+  login = filterLogin(login);
+
+  pool.query(`CALL getSessionId('${login}')`, (error, results, fields) => {
+    if (error) throw error;
+    callback(results[0][0].session_id);
+  });
 };
 
 module.exports.setSessionId = (login, sessionId) => {
-  pool.query(
-    `CALL setSessionId('${login}', '${sessionId}')`,
-    error => {
-      if (error) throw error;
-    }
-  );
+  login = filterLogin(login);
+
+  pool.query(`CALL setSessionId('${login}', '${sessionId}')`, error => {
+    if (error) throw error;
+  });
 };
+
+function filterLogin(login) {
+  return login.replace("#", "");
+}

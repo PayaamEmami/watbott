@@ -53,41 +53,43 @@ twitchClient.on("join", (channel, username, self) => {
 });
 
 twitchClient.on("part", (channel, username, self) => {
-  const sessionId = database.getSessionId(channel);
-
-  watson
-    .deleteSession(sessionId)
-    .then(res => {
-      console.log("* Watson session deleted.");
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
-
-twitchClient.on("chat", (channel, userstate, message, self) => {
-  if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
-    const sessionId = database.getSessionId(userstate["username"]);
-
+  database.getSessionId(channel, sessionId => {
     watson
-      .message(message, sessionId)
+      .deleteSession(sessionId)
       .then(res => {
-        let chatMessage = res.output.generic[0].text;
-        let intent = res.output.intents[0].intent;
-
-        switch (intent) {
-          case "Twitch_Uptime":
-            chat.upTime(twitchClient, channel);
-            break;
-          case "General_Ending":
-            chat.ending(twitchClient, channel, userstate, chatMessage);
-            break;
-          default:
-            chat.say(twitchClient, channel, chatMessage);
-        }
+        console.log("* Watson session deleted.");
       })
       .catch(err => {
         console.error(err);
       });
+  });
+});
+
+twitchClient.on("chat", (channel, userstate, message, self) => {
+  if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
+    database.getSessionId(userstate["username"], sessionId => {
+      if (sessionId) {
+        watson
+          .message(message, sessionId)
+          .then(res => {
+            let chatMessage = res.output.generic[0].text;
+            let intent = res.output.intents[0].intent;
+
+            switch (intent) {
+              case "Twitch_Uptime":
+                chat.upTime(twitchClient, channel);
+                break;
+              case "General_Ending":
+                chat.ending(twitchClient, channel, userstate, chatMessage);
+                break;
+              default:
+                chat.say(twitchClient, channel, chatMessage);
+            }
+          })
+          .catch(err => {
+            console.error(err);
+          });
+      }
+    });
   }
 });

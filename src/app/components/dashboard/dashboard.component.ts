@@ -21,9 +21,11 @@ export class DashboardComponent implements OnInit {
 
   joinChannel(): void {
     this.botService.joinChannel();
+    this.isConnected = true;
   }
 
   partChannel(): void {
     this.botService.partChannel();
+    this.isConnected = false;
   }
 }
