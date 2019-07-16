@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BotService, Bot } from './../../services/bot.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
