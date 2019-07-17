@@ -1,16 +1,2 @@
 <app-page-header title="Dashboard"></app-page-header>
-<div class="card-wrapper">
-  <mat-card>
-    <mat-card-content>
-      <mat-chip-list>
-        <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
-          Connect to chat
-        </mat-chip>
-        <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
-          Disconnect from chat
-        </mat-chip>
-      </mat-chip-list>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-  </mat-card>
-</div>
+<app-dashboard-content></app-dashboard-content>

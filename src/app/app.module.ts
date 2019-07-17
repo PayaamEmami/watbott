@@ -24,6 +24,7 @@ import { HomeHeaderComponent } from './components/home/home-header/home-header.c
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { DashboardContentComponent } from './components/dashboard/dashboard-content/dashboard-content.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
     DashboardComponent,
     PageNotFoundComponent,
     SocialsComponent,
+    DashboardContentComponent,
   ],
   imports: [
     BrowserModule,
