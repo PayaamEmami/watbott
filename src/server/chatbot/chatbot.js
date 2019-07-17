@@ -34,7 +34,7 @@ module.exports.part = async channel => {
 };
 
 module.exports.isInChannel = channel => {
-  if (twitchClient.getChannels().includes('#' + channel)) {
+  if (twitchClient.getChannels().includes("#" + channel)) {
     return true;
   } else {
     return false;
@@ -54,14 +54,9 @@ twitchClient.on("join", (channel, username, self) => {
 
 twitchClient.on("part", (channel, username, self) => {
   database.getSessionId(channel, sessionId => {
-    watson
-      .deleteSession(sessionId)
-      .then(res => {
-        console.log("* Watson session deleted.");
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    watson.deleteSession(sessionId).catch(err => {
+      console.error(err);
+    });
   });
 });
 

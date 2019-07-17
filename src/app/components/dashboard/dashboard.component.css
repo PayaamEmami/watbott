@@ -1,9 +1,7 @@
 mat-card {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  min-width: 650px;
-  min-height: 700px;
+  align-items: center;
   margin: 12px;
 }
 
@@ -14,8 +12,4 @@ mat-card {
 }
 
 @media (max-width: 720px) {
-  mat-card {
-    min-width: 250px;
-    min-height: 550px;
-  }
 }

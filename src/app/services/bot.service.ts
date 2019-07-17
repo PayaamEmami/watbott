@@ -34,7 +34,6 @@ export class BotService {
   joinChannel(): void {
     this.http.put('/api/bot/join', { observe: 'response' })
       .subscribe(res => {
-        console.log(res);
         this.isConnected = true;
       });
   }
@@ -42,7 +41,6 @@ export class BotService {
   partChannel(): void {
     this.http.put('/api/bot/part', { observe: 'response' })
       .subscribe(res => {
-        console.log(res);
         this.isConnected = false;
       });
   }
