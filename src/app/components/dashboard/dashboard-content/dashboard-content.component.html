@@ -1,17 +1,34 @@
-<mat-chip-list>
-  <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
-    Connect to chat
-  </mat-chip>
-  <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
-    Disconnect from chat
-  </mat-chip>
-</mat-chip-list>
+<div class="connection-wrapper">
+  <mat-icon *ngIf="!isConnected">mood_bad</mat-icon>
+  <mat-icon *ngIf="isConnected">mood</mat-icon>
+  <p *ngIf="!isConnected">
+    WatBott is not connected to your chat!
+  </p>
+  <p *ngIf="isConnected">
+    WatBott is connected to your chat.
+  </p>
+  <mat-chip-list>
+    <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
+      Connect
+    </mat-chip>
+    <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
+      Disconnect
+    </mat-chip>
+  </mat-chip-list>
+</div>
 <mat-divider></mat-divider>
-<h3>
-  Chat examples:
-</h3>
-<ul>
-  <li>How long as this streamer been live?</li>
-  <li>Magic 8ball will I ever get Twitch Partner?</li>
-  <li>Tell me a joke.</li>
-</ul>
+<div class="chat-wrapper">
+  <h3 mat-subheader>
+    Chat examples:
+  </h3>
+  <p class="chat-subheader">
+    <small>
+      (Don't forget to tag or mention WatBott in your message)
+    </small>
+  </p>
+  <mat-list class="chat">
+    <mat-list-item>"How long has this streamer been live?"</mat-list-item>
+    <mat-list-item>"Magic 8ball is pizza my one true love?"</mat-list-item>
+    <mat-list-item>"Tell me a joke."</mat-list-item>
+  </mat-list>
+</div>

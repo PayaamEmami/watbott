@@ -70,8 +70,7 @@ p {
   text-align: center;
 }
 
-@media (max-width: 720px)
-{
+@media (max-width: 720px) {
   .promo-row {
     margin: 15px 0;
   }

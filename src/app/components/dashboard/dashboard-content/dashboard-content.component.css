@@ -2,13 +2,42 @@ mat-divider {
   margin: 12px 0px;
 }
 
+.mat-subheader {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.connection-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-subheader {
+  padding: 0px 16px;
+}
+
+.chat {
+  padding: 15px;
+  margin: 0px 15px;
+  border-radius: 15px;
+  background: #0e0c13;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.mat-list-base .mat-list-item {
+  color: #ffffff;
+}
+
 .connect {
   background: #00e500;
 }
 
 .disconnect {
   background: #ff0000;
-}
-
-@media (max-width: 720px) {
 }
