@@ -1,13 +1,17 @@
-<mat-tab-group>
-  <mat-tab label="General">
-    <mat-chip-list>
-      <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
-        Connect to chat
-      </mat-chip>
-      <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
-        Disconnect from chat
-      </mat-chip>
-    </mat-chip-list>
-    <mat-divider></mat-divider>
-  </mat-tab>
-</mat-tab-group>
+<mat-chip-list>
+  <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
+    Connect to chat
+  </mat-chip>
+  <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
+    Disconnect from chat
+  </mat-chip>
+</mat-chip-list>
+<mat-divider></mat-divider>
+<h3>
+  Chat examples:
+</h3>
+<ul>
+  <li>How long as this streamer been live?</li>
+  <li>Magic 8ball will I ever get Twitch Partner?</li>
+  <li>Tell me a joke.</li>
+</ul>
