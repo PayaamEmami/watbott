@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
   githubUrl = 'https://github.com/PayaamEmami/watbott';
+  artistUrl = 'https://www.iconfinder.com/Sennerstad';
 
   constructor() { }
 
