@@ -4,9 +4,8 @@ const passport = require("passport");
 const OAuth2Strategy = require("passport-oauth").OAuth2Strategy;
 const cors = require("cors");
 const app = express();
-const routes = require('./routes/routes');
-const user = require('./routes/user');
-const bot = require('./routes/bot');
+const user = require("./routes/user");
+const bot = require("./routes/bot");
 
 require("dotenv").config();
 require("./passport")(passport, OAuth2Strategy);
@@ -31,13 +30,12 @@ app.get(
 app.get(
   "/auth/twitch/callback",
   passport.authenticate("twitch", {
-    successRedirect: "/",
-    failureRedirect: "/"
+    successRedirect: process.env.BASE_URL + "/dashboard",
+    failureRedirect: process.env.BASE_URL
   })
 );
 
-app.use('/api/user', user);
-app.use('/api/bot', bot);
-app.use('/', routes);
+app.use("/api/user", user);
+app.use("/api/bot", bot);
 
 app.listen(process.env.PORT, () => console.log("Server started"));
