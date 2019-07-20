@@ -7,17 +7,6 @@ const pool = mysql.createPool({
   database: process.env.DB_DATABASE
 });
 
-module.exports.setUser = (login, accessToken, refreshToken) => {
-  login = filterLogin(login);
-
-  pool.query(
-    `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
-    error => {
-      if (error) throw error;
-    }
-  );
-};
-
 module.exports.getSessionId = (login, callback) => {
   login = filterLogin(login);
 
@@ -27,12 +16,32 @@ module.exports.getSessionId = (login, callback) => {
   });
 };
 
+module.exports.getWhitelistUser = login => {
+  login = filterLogin(login);
+
+  pool.query(`CALL getWhitelistUser('${login}')`, (error, results, fields) => {
+    if (error) throw error;
+    callback(results[0][0].login);
+  });
+};
+
 module.exports.setSessionId = (login, sessionId) => {
   login = filterLogin(login);
 
   pool.query(`CALL setSessionId('${login}', '${sessionId}')`, error => {
     if (error) throw error;
   });
+};
+
+module.exports.setUser = (login, accessToken, refreshToken) => {
+  login = filterLogin(login);
+
+  pool.query(
+    `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
+    error => {
+      if (error) throw error;
+    }
+  );
 };
 
 function filterLogin(login) {
