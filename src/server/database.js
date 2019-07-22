@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const util = require("./util/util");
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -8,7 +9,7 @@ const pool = mysql.createPool({
 });
 
 module.exports.getSessionId = (login, callback) => {
-  login = filterLogin(login);
+  login = util.removeHashSymbol(login);
 
   pool.query(`CALL getSessionId('${login}')`, (error, results, fields) => {
     if (error) throw error;
@@ -17,7 +18,7 @@ module.exports.getSessionId = (login, callback) => {
 };
 
 module.exports.getWhitelistUser = login => {
-  login = filterLogin(login);
+  login = util.removeHashSymbol(login);
 
   pool.query(`CALL getWhitelistUser('${login}')`, (error, results, fields) => {
     if (error) throw error;
@@ -26,7 +27,7 @@ module.exports.getWhitelistUser = login => {
 };
 
 module.exports.setSessionId = (login, sessionId) => {
-  login = filterLogin(login);
+  login = util.removeHashSymbol(login);
 
   pool.query(`CALL setSessionId('${login}', '${sessionId}')`, error => {
     if (error) throw error;
@@ -34,7 +35,7 @@ module.exports.setSessionId = (login, sessionId) => {
 };
 
 module.exports.setUser = (login, accessToken, refreshToken) => {
-  login = filterLogin(login);
+  login = util.removeHashSymbol(login);
 
   pool.query(
     `CALL setUser('${login}', '${accessToken}', '${refreshToken}')`,
@@ -43,7 +44,3 @@ module.exports.setUser = (login, accessToken, refreshToken) => {
     }
   );
 };
-
-function filterLogin(login) {
-  return login.replace("#", "");
-}
