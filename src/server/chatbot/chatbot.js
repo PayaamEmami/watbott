@@ -3,6 +3,7 @@ const database = require("./../database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
+const util = require("./../util/util");
 
 require("dotenv").config();
 
@@ -42,6 +43,8 @@ module.exports.isInChannel = channel => {
 };
 
 twitchClient.on("join", (channel, username, self) => {
+  channel = util.removeHashSymbol(channel);
+
   watson
     .createSession()
     .then(res => {
@@ -53,6 +56,8 @@ twitchClient.on("join", (channel, username, self) => {
 });
 
 twitchClient.on("part", (channel, username, self) => {
+  channel = util.removeHashSymbol(channel);
+
   database.getSessionId(channel, sessionId => {
     watson.deleteSession(sessionId).catch(err => {
       console.error(err);
@@ -61,6 +66,8 @@ twitchClient.on("part", (channel, username, self) => {
 });
 
 twitchClient.on("chat", (channel, userstate, message, self) => {
+  channel = util.removeHashSymbol(channel);
+
   if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
     database.getSessionId(userstate["username"], sessionId => {
       watson
