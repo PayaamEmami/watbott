@@ -2,8 +2,13 @@ mat-divider {
   margin: 12px 0px;
 }
 
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
 .mat-subheader {
   padding-bottom: 0px;
+  padding-left: 0px;
   margin-bottom: 0px;
 }
 
@@ -18,11 +23,14 @@ mat-divider {
   flex-direction: column;
 }
 
-.chat-subheader {
-  padding: 0px 16px;
+.chat-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 5px 20px;
 }
 
-.chat {
+.chat-content {
   padding: 15px;
   margin: 0px 15px;
   border-radius: 15px;
