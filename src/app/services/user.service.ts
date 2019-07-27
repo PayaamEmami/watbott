@@ -8,6 +8,10 @@ export interface User {
   image: string;
 }
 
+export interface Whitelist {
+  isWhitelisted: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +33,14 @@ export class UserService {
 
   getInfo() {
     return this.http.get<User>('/api/user/info',
+      { withCredentials: true, responseType: 'json' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getWhitelist() {
+    return this.http.get<Whitelist>('/api/user/whitelist',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)

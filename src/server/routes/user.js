@@ -1,5 +1,8 @@
 const express = require("express");
 const user = express.Router();
+const database = require("./../database");
+
+require("dotenv").config();
 
 user.get("/auth", (req, res) => {
   if (req.user) {
@@ -31,6 +34,18 @@ user.get("/info", (req, res) => {
     res.json({
       login: null,
       image: null
+    });
+  }
+});
+
+user.get("/whitelist", (req, res) => {
+  if (req.user) {
+    database.getWhitelist(req.user.data[0].display_name, whitelistUser => {
+      if (req.user.data[0].display_name === whitelistUser) {
+        res.json({ whitelist: true });
+      } else {
+        res.json({ whitelist: false });
+      }
     });
   }
 });

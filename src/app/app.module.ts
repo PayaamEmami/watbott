@@ -10,6 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { DashboardContentComponent } from './components/dashboard/dashboard-content/dashboard-content.component';
+import { DashboardDialogComponent } from './components/dashboard/dashboard-dialog/dashboard-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,10 @@ import { DashboardContentComponent } from './components/dashboard/dashboard-cont
     PageNotFoundComponent,
     SocialsComponent,
     DashboardContentComponent,
+    DashboardDialogComponent,
+  ],
+  entryComponents: [
+    DashboardDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +63,7 @@ import { DashboardContentComponent } from './components/dashboard/dashboard-cont
     MatChipsModule,
     MatDividerModule,
     MatListModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

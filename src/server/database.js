@@ -1,5 +1,7 @@
 const mysql = require("mysql");
 
+require("dotenv").config();
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -14,8 +16,8 @@ module.exports.getSessionId = (login, callback) => {
   });
 };
 
-module.exports.getWhitelistUser = login => {
-  pool.query(`CALL getWhitelistUser('${login}')`, (error, results, fields) => {
+module.exports.getWhitelist = (login, callback) => {
+  pool.query(`CALL getWhitelist('${login}')`, (error, results, fields) => {
     if (error) throw error;
     callback(results[0][0].login);
   });
