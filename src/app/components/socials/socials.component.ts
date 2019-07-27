@@ -16,14 +16,13 @@ export class SocialsComponent implements OnInit {
   constructor(
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
+  }
 
+  ngOnInit() {
     this.iconRegistry.addSvgIcon(
       'twitter-logo',
       this.sanitizer.bypassSecurityTrustResourceUrl('../../assets/img/socials/twitter_white.svg')
     );
-  }
-
-  ngOnInit() {
   }
 
 }

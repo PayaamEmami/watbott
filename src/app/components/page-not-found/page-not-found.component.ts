@@ -8,11 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class PageNotFoundComponent implements OnInit {
   officePath: string;
 
-  constructor() {
-    this.officePath = '../../assets/img/misc/office.jpg';
-  }
+  constructor() { }
 
   ngOnInit() {
+    this.officePath = '../../assets/img/misc/office.jpg';
   }
 
 }

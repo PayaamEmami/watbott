@@ -12,13 +12,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router) {
-
-    if (this.authService.isAuthenticated) {
-      this.router.navigate(['/dashboard'], { replaceUrl: true });
-    }
   }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated) {
+      this.router.navigate(['/dashboard'], { replaceUrl: true });
+    }
   }
 
 }

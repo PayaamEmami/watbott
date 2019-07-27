@@ -18,7 +18,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService) {
+  }
 
+  ngOnInit() {
     this.authService.getAuth().subscribe((data: Auth) => {
       this.isAuthenticated = data.auth;
     });
@@ -27,9 +29,6 @@ export class NavbarComponent implements OnInit {
       this.userLogin = data.login;
       this.userImage = data.image;
     });
-  }
-
-  ngOnInit() {
   }
 
 }

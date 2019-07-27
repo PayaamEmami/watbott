@@ -20,7 +20,9 @@ export class LoginTwitchComponent implements OnInit {
     private authService: AuthService,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
+  }
 
+  ngOnInit() {
     this.authService.getAuth().subscribe((data: Auth) => {
       this.isAuthenticated = data.auth;
     });
@@ -34,9 +36,6 @@ export class LoginTwitchComponent implements OnInit {
       'twitch-purple',
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/twitch/purple.svg')
     );
-  }
-
-  ngOnInit() {
   }
 
 }

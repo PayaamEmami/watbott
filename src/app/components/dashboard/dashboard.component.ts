@@ -14,9 +14,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router,
     public dialog: MatDialog) {
+  }
 
+  ngOnInit() {
     this.userService.getWhitelist().subscribe((data: Whitelist) => {
       this.isWhitelisted = data.isWhitelisted;
     });
@@ -24,9 +25,6 @@ export class DashboardComponent implements OnInit {
     if (!this.isWhitelisted) {
       this.openDialog();
     }
-  }
-
-  ngOnInit() {
   }
 
   openDialog(): void {
