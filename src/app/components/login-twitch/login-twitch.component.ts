@@ -23,8 +23,8 @@ export class LoginTwitchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = data.auth;
+    this.authService.getAuth().subscribe((auth: Auth) => {
+      this.isAuthenticated = auth.isAuthenticated;
     });
 
     this.iconRegistry.addSvgIcon(

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, Auth } from './../../services/auth.service';
 import { UserService, User } from './../../services/user.service';
-import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +8,10 @@ import { environment } from './../../../environments/environment';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  logoutUrl = environment.baseUrl + '/api/user/logout';
   watbottImage = '../../assets/img/logo/watbott_background_icon.png';
-  isAuthenticated = false;
   userLogin = '';
   userImage = '';
+  isAuthenticated = false;
 
   constructor(
     private authService: AuthService,
@@ -21,14 +19,17 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = data.auth;
+    this.authService.getAuth().subscribe((auth: Auth) => {
+      this.isAuthenticated = auth.isAuthenticated;
     });
 
-    this.userService.getInfo().subscribe((data: User) => {
-      this.userLogin = data.login;
-      this.userImage = data.image;
+    this.userService.getUser().subscribe((user: User) => {
+      this.userLogin = user.login;
+      this.userImage = user.image;
     });
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

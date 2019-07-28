@@ -17,7 +17,7 @@
     <a mat-menu-item routerLink="/dashboard" routerLinkActive="active">
       Dashboard
     </a>
-    <a mat-menu-item [href]="logoutUrl">
+    <a mat-menu-item (click)="logout()">
       Logout
     </a>
   </mat-menu>

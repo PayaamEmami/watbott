@@ -6,9 +6,6 @@ import { catchError } from 'rxjs/operators';
 export interface User {
   login: string;
   image: string;
-}
-
-export interface Whitelist {
   isWhitelisted: boolean;
 }
 
@@ -31,16 +28,8 @@ export class UserService {
       'Something bad happened; please try again later.');
   }
 
-  getInfo() {
-    return this.http.get<User>('/api/user/info',
-      { withCredentials: true, responseType: 'json' })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getWhitelist() {
-    return this.http.get<Whitelist>('/api/user/whitelist',
+  getUser() {
+    return this.http.get<User>('/api/user',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)

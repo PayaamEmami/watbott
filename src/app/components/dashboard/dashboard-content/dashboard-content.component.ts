@@ -7,23 +7,23 @@ import { BotService, Bot } from './../../../services/bot.service';
   styleUrls: ['./dashboard-content.component.css']
 })
 export class DashboardContentComponent implements OnInit {
-  isConnected = false;
+  isInChannel = false;
 
   constructor(private botService: BotService) { }
 
   ngOnInit() {
-    this.botService.isInChannel().subscribe((data: Bot) => {
-      this.isConnected = data.isInChannel;
+    this.botService.getBot().subscribe((bot: Bot) => {
+      this.isInChannel = bot.isInChannel;
     });
   }
 
   joinChannel(): void {
     this.botService.joinChannel();
-    this.isConnected = true;
+    this.isInChannel = true;
   }
 
   partChannel(): void {
     this.botService.partChannel();
-    this.isConnected = false;
+    this.isInChannel = false;
   }
 }

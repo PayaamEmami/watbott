@@ -11,11 +11,11 @@ export interface Bot {
   providedIn: 'root'
 })
 export class BotService {
-  isConnected = false;
+  isInChannel = false;
 
   constructor(private http: HttpClient) {
-    this.isInChannel().subscribe((data: Bot) => {
-      this.isConnected = data.isInChannel;
+    this.getBot().subscribe((bot: Bot) => {
+      this.isInChannel = bot.isInChannel;
     });
   }
 
@@ -33,20 +33,20 @@ export class BotService {
 
   joinChannel(): void {
     this.http.put('/api/bot/join', { observe: 'response' })
-      .subscribe(res => {
-        this.isConnected = true;
+      .subscribe(() => {
+        this.isInChannel = true;
       });
   }
 
   partChannel(): void {
     this.http.put('/api/bot/part', { observe: 'response' })
-      .subscribe(res => {
-        this.isConnected = false;
+      .subscribe(() => {
+        this.isInChannel = false;
       });
   }
 
-  isInChannel(): Observable<any> {
-    return this.http.get<Bot>('/api/bot/isInChannel',
+  getBot(): Observable<any> {
+    return this.http.get<Bot>('/api/bot',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)

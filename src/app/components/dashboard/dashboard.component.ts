@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { UserService, Whitelist } from './../../services/user.service';
+import { UserService, User } from './../../services/user.service';
+import { AuthService, Auth } from './../../services/auth.service';
 import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.component';
 
 @Component({
@@ -10,28 +10,26 @@ import { DashboardDialogComponent } from './dashboard-dialog/dashboard-dialog.co
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  isWhitelisted = false;
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.userService.getWhitelist().subscribe((data: Whitelist) => {
-      this.isWhitelisted = data.isWhitelisted;
+    this.userService.getUser().subscribe((user: User) => {
+      if (!user.isWhitelisted) {
+        this.openDialog();
+      }
     });
-
-    if (!this.isWhitelisted) {
-      this.openDialog();
-    }
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DashboardDialogComponent);
 
     dialogRef.afterClosed().subscribe(() => {
-      // TODO: Logout user
+      this.authService.logout();
     });
   }
 }

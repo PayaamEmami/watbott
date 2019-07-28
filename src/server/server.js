@@ -6,6 +6,7 @@ const cors = require("cors");
 const app = express();
 const user = require("./routes/user");
 const bot = require("./routes/bot");
+const auth = require("./routes/auth")
 
 require("dotenv").config();
 require("./passport")(passport, OAuth2Strategy);
@@ -21,20 +22,7 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({ credentials: true, origin: true }));
-
-app.get(
-  "/auth/twitch",
-  passport.authenticate("twitch", { scope: "user_read" })
-);
-
-app.get(
-  "/auth/twitch/callback",
-  passport.authenticate("twitch", {
-    successRedirect: process.env.BASE_URL + "/dashboard",
-    failureRedirect: process.env.BASE_URL
-  })
-);
-
+app.use("/auth", auth);
 app.use("/api/user", user);
 app.use("/api/bot", bot);
 

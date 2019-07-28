@@ -1,17 +1,17 @@
 <div class="connection-wrapper">
-  <mat-icon *ngIf="!isConnected">mood_bad</mat-icon>
-  <mat-icon *ngIf="isConnected">mood</mat-icon>
-  <p *ngIf="!isConnected">
+  <mat-icon *ngIf="!isInChannel">mood_bad</mat-icon>
+  <mat-icon *ngIf="isInChannel">mood</mat-icon>
+  <p *ngIf="!isInChannel">
     WatBott is not connected to your chat!
   </p>
-  <p *ngIf="isConnected">
+  <p *ngIf="isInChannel">
     WatBott is connected to your chat.
   </p>
   <mat-chip-list>
-    <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isConnected">
+    <mat-chip class="connect" (click)="joinChannel()" *ngIf="!isInChannel">
       Connect
     </mat-chip>
-    <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isConnected">
+    <mat-chip class="disconnect" (click)="partChannel()" *ngIf="isInChannel">
       Disconnect
     </mat-chip>
   </mat-chip-list>

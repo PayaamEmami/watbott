@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface Auth {
-  auth: boolean;
+  isAuthenticated: boolean;
 }
 
 @Injectable({
@@ -13,9 +14,9 @@ export interface Auth {
 export class AuthService {
   isAuthenticated = false;
 
-  constructor(private http: HttpClient) {
-    this.getAuth().subscribe((data: Auth) => {
-      this.isAuthenticated = data.auth;
+  constructor(private http: HttpClient, private router: Router) {
+    this.getAuth().subscribe((auth: Auth) => {
+      this.isAuthenticated = auth.isAuthenticated;
     });
   }
 
@@ -32,10 +33,17 @@ export class AuthService {
   }
 
   getAuth(): Observable<any> {
-    return this.http.get<Auth>('/api/user/auth',
+    return this.http.get<Auth>('/auth',
       { withCredentials: true, responseType: 'json' })
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  logout() {
+    this.http.put('/auth/logout', { observe: 'response' })
+      .subscribe(() => {
+        this.router.navigate(['/'], { replaceUrl: true });
+      });
   }
 }
