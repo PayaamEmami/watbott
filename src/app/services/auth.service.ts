@@ -12,13 +12,8 @@ export interface Auth {
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated = false;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.getAuth().subscribe((auth: Auth) => {
-      this.isAuthenticated = auth.isAuthenticated;
-    });
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
