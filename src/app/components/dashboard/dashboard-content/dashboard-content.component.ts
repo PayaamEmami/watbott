@@ -18,12 +18,14 @@ export class DashboardContentComponent implements OnInit {
   }
 
   joinChannel(): void {
-    this.botService.joinChannel();
-    this.isInChannel = true;
+    this.botService.joinChannel().subscribe((bot: Bot) => {
+      this.isInChannel = bot.isInChannel;
+    });
   }
 
   partChannel(): void {
-    this.botService.partChannel();
-    this.isInChannel = false;
+    this.botService.partChannel().subscribe((bot: Bot) => {
+      this.isInChannel = bot.isInChannel;
+    });
   }
 }

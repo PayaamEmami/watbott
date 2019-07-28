@@ -12,12 +12,12 @@ bot.get("/", (req, res) => {
 
 bot.put("/join", (req, res) => {
   chatbot.join(req.user.data[0].display_name);
-  res.status(204).end();
+  res.json({ isInChannel: true });
 });
 
 bot.put("/part", (req, res) => {
   chatbot.part(req.user.data[0].display_name);
-  res.status(204).end();
+  res.json({ isInChannel: false });
 });
 
 module.exports = bot;

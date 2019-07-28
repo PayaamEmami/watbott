@@ -11,13 +11,8 @@ export interface Bot {
   providedIn: 'root'
 })
 export class BotService {
-  isInChannel = false;
 
-  constructor(private http: HttpClient) {
-    this.getBot().subscribe((bot: Bot) => {
-      this.isInChannel = bot.isInChannel;
-    });
-  }
+  constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -39,17 +34,17 @@ export class BotService {
       );
   }
 
-  joinChannel(): void {
-    this.http.put('/api/bot/join', { observe: 'response' })
-      .subscribe(() => {
-        this.isInChannel = true;
-      });
+  joinChannel(): Observable<any> {
+    return this.http.put('/api/bot/join', { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  partChannel(): void {
-    this.http.put('/api/bot/part', { observe: 'response' })
-      .subscribe(() => {
-        this.isInChannel = false;
-      });
+  partChannel(): Observable<any> {
+    return this.http.put('/api/bot/part', { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }
