@@ -8,7 +8,7 @@ user.get("/", (req, res) => {
       const isWhitelisted = req.user.data[0].display_name === whitelistUser;
       res.json({
         login: req.user.data[0].display_name,
-        image: req.user.data[0].profile_image_url,
+        profileImage: req.user.data[0].profile_image_url,
         isWhitelisted: isWhitelisted
       });
     });

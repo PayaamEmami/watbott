@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 export interface User {
   login: string;
-  image: string;
+  profileImage: string;
   isWhitelisted: boolean;
 }
 

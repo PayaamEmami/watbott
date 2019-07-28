@@ -9,8 +9,8 @@ import { UserService, User } from './../../services/user.service';
 })
 export class NavbarComponent implements OnInit {
   watbottImage = '../../assets/img/logo/watbott_background_icon.png';
-  userLogin = '';
-  userImage = '';
+  login = '';
+  profileImage = '';
   isAuthenticated = false;
 
   constructor(
@@ -24,8 +24,8 @@ export class NavbarComponent implements OnInit {
     });
 
     this.userService.getUser().subscribe((user: User) => {
-      this.userLogin = user.login;
-      this.userImage = user.image;
+      this.login = user.login;
+      this.profileImage = user.profileImage;
     });
   }
 

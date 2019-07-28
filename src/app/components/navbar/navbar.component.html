@@ -9,9 +9,9 @@
   <app-login-twitch text="Login" icon="twitch-purple" color="secondary"></app-login-twitch>
   <app-socials class="desktop-only" showText="true" *ngIf="!isAuthenticated"></app-socials>
   <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="isAuthenticated">
-    <mat-icon *ngIf="!userImage">person</mat-icon>
-    <img class="icon-image" [src]="userImage" *ngIf="userImage">
-    <span class="desktop-only"> {{ userLogin }}</span>
+    <mat-icon *ngIf="!profileImage">person</mat-icon>
+    <img class="icon-image" [src]="profileImage" *ngIf="profileImage">
+    <span class="desktop-only"> {{ login }}</span>
   </button>
   <mat-menu #userMenu="matMenu">
     <a mat-menu-item routerLink="/dashboard" routerLinkActive="active">
