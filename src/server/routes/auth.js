@@ -22,7 +22,7 @@ auth.get(
 
 auth.put("/logout", (req, res) => {
   req.logout();
-  res.status(204).end();
+  res.json({ isAuthenticated: false });
 });
 
 module.exports = auth;

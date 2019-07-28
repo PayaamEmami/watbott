@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -13,7 +12,7 @@ export interface Auth {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -35,10 +34,10 @@ export class AuthService {
       );
   }
 
-  logout() {
-    this.http.put('/auth/logout', { observe: 'response' })
-      .subscribe(() => {
-        this.router.navigate(['/'], { replaceUrl: true });
-      });
+  logout(): Observable<any> {
+    return this.http.put('/auth/logout', { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }
