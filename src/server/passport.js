@@ -3,7 +3,7 @@ const database = require("./database");
 
 module.exports = (passport, OAuth2Strategy) => {
   OAuth2Strategy.prototype.userProfile = (accessToken, done) => {
-    var options = {
+    let options = {
       url: "https://api.twitch.tv/helix/users",
       method: "GET",
       headers: {
