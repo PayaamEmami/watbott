@@ -3,7 +3,6 @@ const database = require("./../database");
 const process = require("process");
 const tmi = require("tmi.js");
 const watson = require("./watson");
-const util = require("./../util/util");
 
 require("dotenv").config();
 
@@ -43,12 +42,10 @@ module.exports.isInChannel = channel => {
 };
 
 twitchClient.on("join", (channel, username, self) => {
-  channel = util.removeHashSymbol(channel);
-
   watson
     .createSession()
     .then(res => {
-      database.setSessionId(channel, res.session_id);
+      database.setSessionId(removeHashSymbol(channel), res.session_id);
     })
     .catch(err => {
       console.error(err);
@@ -56,9 +53,7 @@ twitchClient.on("join", (channel, username, self) => {
 });
 
 twitchClient.on("part", (channel, username, self) => {
-  channel = util.removeHashSymbol(channel);
-
-  database.getSessionId(channel, sessionId => {
+  database.getSessionId(removeHashSymbol(channel), sessionId => {
     watson.deleteSession(sessionId).catch(err => {
       console.error(err);
     });
@@ -66,8 +61,6 @@ twitchClient.on("part", (channel, username, self) => {
 });
 
 twitchClient.on("chat", (channel, userstate, message, self) => {
-  channel = util.removeHashSymbol(channel);
-
   if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
     database.getSessionId(userstate["username"], sessionId => {
       watson
@@ -78,13 +71,18 @@ twitchClient.on("chat", (channel, userstate, message, self) => {
 
           switch (userIntent) {
             case "Twitch_Uptime":
-              chat.upTime(twitchClient, channel);
+              chat.upTime(twitchClient, removeHashSymbol(channel));
               break;
             case "General_Ending":
-              chat.ending(twitchClient, channel, userstate, watsonResponse);
+              chat.ending(
+                twitchClient,
+                removeHashSymbol(channel),
+                userstate,
+                watsonResponse
+              );
               break;
             default:
-              chat.say(twitchClient, channel, watsonResponse);
+              chat.say(twitchClient, removeHashSymbol(channel), watsonResponse);
           }
         })
         .catch(err => {
@@ -93,3 +91,7 @@ twitchClient.on("chat", (channel, userstate, message, self) => {
     });
   }
 });
+
+function removeHashSymbol(input) {
+  return input.replace("#", "");
+}
