@@ -1,26 +1,26 @@
-const twitch = require("./twitch");
+const twitchClient = require("./twitch-client");
 
 require("dotenv").config();
 
-module.exports.say = (twitchClient, channel, response) => {
-  twitchClient.say(channel, response);
+module.exports.say = (tmiClient, channel, response) => {
+  tmiClient.say(channel, response);
 };
 
-module.exports.goodbye = (twitchClient, channel, userstate, response) => {
-  this.say(twitchClient, channel, response);
+module.exports.goodbye = (tmiClient, channel, userstate, response) => {
+  this.say(tmiClient, channel, response);
   if (userstate.username == channel) {
-    twitchClient.disconnect();
+    tmiClient.disconnect();
   }
 };
 
-module.exports.upTime = (twitchClient, channel) => {
-  twitch
+module.exports.upTime = (tmiClient, channel) => {
+  twitchClient
     .getStream(channel)
     .then(res => {
       return res.json();
     })
     .then(json => {
-      respondInTwitchChatWithUpTime(channel, json, twitchClient);
+      respondInTwitchChatWithUpTime(channel, json, tmiClient);
     });
 };
 
@@ -32,14 +32,14 @@ function calculateElapsedStreamTime(json) {
   return new Date(Date.now() - Date.parse(json.data[0].started_at));
 }
 
-function respondInTwitchChatWithUpTime(channel, json, twitchClient) {
+function respondInTwitchChatWithUpTime(channel, json, tmiClient) {
   if (isNotEmptyArray(json)) {
     let streamUpTime = calculateElapsedStreamTime(json);
-    twitchClient.say(
+    tmiClient.say(
       channel,
       `${channel} has been live for ${streamUpTime.getUTCHours()} hours and ${streamUpTime.getUTCMinutes()} minutes.`
     );
   } else {
-    twitchClient.say(channel, `${channel} is currently offline.`);
+    tmiClient.say(channel, `${channel} is currently offline.`);
   }
 }

@@ -2,7 +2,7 @@ const chat = require("./chat");
 const database = require("./../database");
 const process = require("process");
 const tmi = require("tmi.js");
-const watson = require("./watson");
+const watson = require("./watson-client");
 
 require("dotenv").config();
 
@@ -13,13 +13,13 @@ const opts = {
   },
   channels: []
 };
-const twitchClient = new tmi.client(opts);
+const tmiClient = new tmi.client(opts);
 
-twitchClient.connect();
+tmiClient.connect();
 
 module.exports.join = async channel => {
   try {
-    twitchClient.join(channel);
+    tmiClient.join(channel);
   } catch (err) {
     console.error(err);
   }
@@ -27,21 +27,21 @@ module.exports.join = async channel => {
 
 module.exports.part = async channel => {
   try {
-    twitchClient.part(channel);
+    tmiClient.part(channel);
   } catch (err) {
     console.error(err);
   }
 };
 
 module.exports.isInChannel = channel => {
-  if (twitchClient.getChannels().includes("#" + channel)) {
+  if (tmiClient.getChannels().includes("#" + channel)) {
     return true;
   } else {
     return false;
   }
 };
 
-twitchClient.on("join", (channel, username, self) => {
+tmiClient.on("join", (channel, username, self) => {
   watson
     .createSession()
     .then(res => {
@@ -52,7 +52,7 @@ twitchClient.on("join", (channel, username, self) => {
     });
 });
 
-twitchClient.on("part", (channel, username, self) => {
+tmiClient.on("part", (channel, username, self) => {
   database.getSessionId(filterChannelName(channel), sessionId => {
     watson.deleteSession(sessionId).catch(err => {
       console.error(err);
@@ -60,7 +60,7 @@ twitchClient.on("part", (channel, username, self) => {
   });
 });
 
-twitchClient.on("chat", (channel, userstate, message, self) => {
+tmiClient.on("chat", (channel, userstate, message, self) => {
   if (isMessageTaggingBot(self, message)) {
     database.getSessionId(userstate["username"], sessionId => {
       watson
@@ -90,12 +90,12 @@ function isMessageTaggingBot(self, message) {
 function respondInTwitchChat(channel, userIntent, watsonResponse) {
   switch (userIntent) {
     case "Twitch_Uptime":
-      chat.upTime(twitchClient, channel);
+      chat.upTime(tmiClient, channel);
       break;
     case "General_Ending":
-      chat.goodbye(twitchClient, channel, userstate, watsonResponse);
+      chat.goodbye(tmiClient, channel, userstate, watsonResponse);
       break;
     default:
-      chat.say(twitchClient, channel, watsonResponse);
+      chat.say(tmiClient, channel, watsonResponse);
   }
 }
