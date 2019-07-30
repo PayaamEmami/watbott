@@ -45,7 +45,7 @@ twitchClient.on("join", (channel, username, self) => {
   watson
     .createSession()
     .then(res => {
-      database.setSessionId(removeHashSymbol(channel), res.session_id);
+      database.setSessionId(filterChannelName(channel), res.session_id);
     })
     .catch(err => {
       console.error(err);
@@ -53,7 +53,7 @@ twitchClient.on("join", (channel, username, self) => {
 });
 
 twitchClient.on("part", (channel, username, self) => {
-  database.getSessionId(removeHashSymbol(channel), sessionId => {
+  database.getSessionId(filterChannelName(channel), sessionId => {
     watson.deleteSession(sessionId).catch(err => {
       console.error(err);
     });
@@ -61,29 +61,16 @@ twitchClient.on("part", (channel, username, self) => {
 });
 
 twitchClient.on("chat", (channel, userstate, message, self) => {
-  if (!self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME)) {
+  if (isMessageTaggingBot(self, message)) {
     database.getSessionId(userstate["username"], sessionId => {
       watson
-        .message(message, sessionId)
+        .sendMessage(message, sessionId)
         .then(res => {
-          let userIntent = res.output.intents[0].intent;
-          let watsonResponse = res.output.generic[0].text;
-
-          switch (userIntent) {
-            case "Twitch_Uptime":
-              chat.upTime(twitchClient, removeHashSymbol(channel));
-              break;
-            case "General_Ending":
-              chat.ending(
-                twitchClient,
-                removeHashSymbol(channel),
-                userstate,
-                watsonResponse
-              );
-              break;
-            default:
-              chat.say(twitchClient, removeHashSymbol(channel), watsonResponse);
-          }
+          respondInTwitchChat(
+            filterChannelName(channel),
+            res.output.intents[0].intent,
+            res.output.generic[0].text
+          );
         })
         .catch(err => {
           console.error(err);
@@ -92,6 +79,23 @@ twitchClient.on("chat", (channel, userstate, message, self) => {
   }
 });
 
-function removeHashSymbol(input) {
-  return input.replace("#", "");
+function filterChannelName(channel) {
+  return channel.replace("#", "");
+}
+
+function isMessageTaggingBot(self, message) {
+  return !self && message.toLowerCase().includes(process.env.TWITCH_BOT_NAME);
+}
+
+function respondInTwitchChat(channel, userIntent, watsonResponse) {
+  switch (userIntent) {
+    case "Twitch_Uptime":
+      chat.upTime(twitchClient, channel);
+      break;
+    case "General_Ending":
+      chat.goodbye(twitchClient, channel, userstate, watsonResponse);
+      break;
+    default:
+      chat.say(twitchClient, channel, watsonResponse);
+  }
 }

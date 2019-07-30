@@ -18,7 +18,7 @@ module.exports.createSession = async () => {
   }
 };
 
-module.exports.message = async (msg, session_id) => {
+module.exports.sendMessage = async (msg, session_id) => {
   msg = filterMessage(msg);
 
   try {
