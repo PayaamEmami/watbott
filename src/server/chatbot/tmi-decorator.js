@@ -1,26 +1,37 @@
+const tmi = require("tmi.js");
 const twitchClient = require("./twitch-client");
 
 require("dotenv").config();
 
-module.exports.say = (tmiClient, channel, response) => {
-  tmiClient.say(channel, response);
+const opts = {
+  identity: {
+    username: process.env.TWITCH_BOT_NAME,
+    password: process.env.TWITCH_OAUTH_TOKEN
+  },
+  channels: []
 };
 
-module.exports.goodbye = (tmiClient, channel, userstate, response) => {
-  this.say(tmiClient, channel, response);
+module.exports.tmiClient = new tmi.client(opts);
+
+module.exports.say = (channel, response) => {
+  this.tmiClient.say(channel, response);
+};
+
+module.exports.goodbye = (channel, userstate, response) => {
+  this.say(channel, response);
   if (userstate.username == channel) {
-    tmiClient.disconnect();
+    this.tmiClient.disconnect();
   }
 };
 
-module.exports.upTime = (tmiClient, channel) => {
+module.exports.upTime = channel => {
   twitchClient
     .getStream(channel)
     .then(res => {
       return res.json();
     })
     .then(json => {
-      respondInTwitchChatWithUpTime(channel, json, tmiClient);
+      respondInTwitchChatWithUpTime(this.tmiClient, channel, json);
     });
 };
 
@@ -32,7 +43,7 @@ function calculateElapsedStreamTime(json) {
   return new Date(Date.now() - Date.parse(json.data[0].started_at));
 }
 
-function respondInTwitchChatWithUpTime(channel, json, tmiClient) {
+function respondInTwitchChatWithUpTime(tmiClient, channel, json) {
   if (isNotEmptyArray(json)) {
     let streamUpTime = calculateElapsedStreamTime(json);
     tmiClient.say(
