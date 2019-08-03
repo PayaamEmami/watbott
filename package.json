@@ -4,7 +4,7 @@
   "main": "src/server/server.js",
   "scripts": {
     "ng": "ng",
-    "app": "ng serve",
+    "client": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
