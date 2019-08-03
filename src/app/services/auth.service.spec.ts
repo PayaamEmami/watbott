@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService, Auth } from './auth.service';
-import { asyncData, asyncError } from './../../testing/async-observable-helpers';
+import { asyncData, asyncError } from '../../test/async-observable-helpers';
 
 describe('AuthService', () => {
   let httpClientSpy: { get: jasmine.Spy, put: jasmine.Spy };
