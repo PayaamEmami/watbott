@@ -46,7 +46,7 @@ describe('AuthService', () => {
       httpClientSpy.get.and.returnValue(asyncError(errorResponse));
 
       await authService.getAuth().subscribe(
-        auth => fail('expected an error, not auth'),
+        () => fail('expected an error, not auth'),
         error => expect(error).toEqual('Something bad happened; please try again later.')
       );
     });
@@ -86,7 +86,7 @@ describe('AuthService', () => {
       httpClientSpy.put.and.returnValue(asyncError(errorResponse));
 
       await authService.logout().subscribe(
-        auth => fail('expected an error, not auth'),
+        () => fail('expected an error, not auth'),
         error => expect(error).toEqual('Something bad happened; please try again later.')
       );
     });
