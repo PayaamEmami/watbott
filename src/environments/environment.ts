@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4200'
+  baseUrl: 'http://localhost:4200',
+  githubUrl: 'https://github.com/PayaamEmami/watbott',
+  twitterUrl: 'https://twitter.com/WatBott',
+  artistUrl: 'https://www.iconfinder.com/Sennerstad',
 };
 
 /*
