@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
+import { environment } from './../../../environments/environment';
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  githubUrl = 'https://github.com/PayaamEmami/watbott';
-  artistUrl = 'https://www.iconfinder.com/Sennerstad';
+  githubUrl = environment.githubUrl;
+  artistUrl = environment.artistUrl;
 
   constructor() { }
 

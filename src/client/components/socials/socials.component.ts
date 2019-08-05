@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
+import { environment } from './../../../environments/environment';
+
 @Component({
   selector: 'app-socials',
   templateUrl: './socials.component.html',
@@ -9,8 +11,8 @@ import { MatIconRegistry } from '@angular/material/icon';
 })
 export class SocialsComponent implements OnInit {
   @Input() showText: boolean;
-  twitterUrl = 'https://twitter.com/WatBott';
-  githubUrl = 'https://github.com/PayaamEmami/watbott';
+  twitterUrl = environment.twitterUrl;
+  githubUrl = environment.githubUrl;
   githubImage = '../../assets/img/socials/github_white.png';
 
   constructor(
