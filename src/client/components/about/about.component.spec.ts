@@ -1,25 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AboutComponent } from './about.component';
+import { environment } from './../../../environments/environment';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
-  let fixture: ComponentFixture<AboutComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AboutComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new AboutComponent();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should have same githubUrl from environment variables', () => {
+    expect(component.githubUrl).toEqual(environment.githubUrl, 'expected githubUrl');
+  });
+
+  it('should have same artistUrl from environment variables', () => {
+    expect(component.artistUrl).toEqual(environment.artistUrl, 'expected artistUrl');
   });
 });
