@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { BotService, Bot } from './bot.service';
-import { asyncData, asyncError } from '../../test/async-observable-helpers';
+import { asyncData, asyncError } from './../../test/async-observable-helpers';
 
 describe('BotService', () => {
   let httpClientSpy: { get: jasmine.Spy, put: jasmine.Spy };

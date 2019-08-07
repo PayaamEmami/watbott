@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { UserService, User } from './user.service';
-import { asyncData, asyncError } from '../../test/async-observable-helpers';
+import { asyncData, asyncError } from './../../test/async-observable-helpers';
 
 describe('UserService', () => {
   let httpClientSpy: { get: jasmine.Spy };
