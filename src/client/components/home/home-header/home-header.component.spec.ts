@@ -1,25 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { HomeHeaderComponent } from './home-header.component';
 
 describe('HomeHeaderComponent', () => {
-  let component: HomeHeaderComponent;
-  let fixture: ComponentFixture<HomeHeaderComponent>;
+    let component: HomeHeaderComponent;
+    let fixture: ComponentFixture<HomeHeaderComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HomeHeaderComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [HomeHeaderComponent],
+            schemas: [
+                NO_ERRORS_SCHEMA
+            ]
+        });
+        fixture = TestBed.createComponent(HomeHeaderComponent);
+        component = fixture.componentInstance;
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('should have title', () => {
+        const headerElement: HTMLElement = fixture.nativeElement;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        expect(headerElement.textContent).toContain('WatBott');
+    });
 });
