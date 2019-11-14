@@ -22,8 +22,3 @@ Having the ability to understand input and respond with proper dialogue could an
 
 The project is open-sourced in hopes that others can contribute to WatBott or be inspired to create their own and better versions of an AI assistant.
 
-## How do I get started?
-
-If you are looking to contribute please feel free to email me: contact@payaame.com
-
-This is my first open-source project and I don't have experience with contributing to open-source projects. This project started as and still is my side project. I'm also uncertain if there is anyone out there who wants to contribute. I will continue to treat this project as such until changes are needed.
